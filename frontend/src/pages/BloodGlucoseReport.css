@@ -1,0 +1,558 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.blood-glucose-page {
+  min-height: 100vh;
+  padding: 50px 7%;
+  background: #f7fbff;
+  color: #102a43;
+}
+
+.glucose-header {
+  max-width: 850px;
+  margin: 0 auto 45px;
+}
+
+.back-button {
+  border: none;
+  background: none;
+  color: #1479ff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 35px;
+}
+
+.back-button:hover {
+  color: #0869e5;
+}
+
+.glucose-logo {
+  font-size: 30px;
+  font-weight: 800;
+  color: #1479ff;
+  margin-bottom: 25px;
+}
+
+.section-label {
+  color: #1479ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.glucose-header h1 {
+  font-size: 44px;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 18px;
+}
+
+.glucose-header > p:last-child {
+  color: #627d98;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.blood-glucose-page form {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.test-type-section,
+.range-section,
+.glucose-result-section,
+.lab-range-section {
+  background: white;
+  border: 1px solid #e0ebf3;
+  border-radius: 18px;
+  padding: 30px;
+  margin-bottom: 25px;
+}
+
+.test-type-section h2,
+.range-section h2,
+.glucose-result-section h2,
+.lab-range-section h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.test-type-section > p,
+.range-section > p,
+.glucose-result-section > p,
+.lab-range-section > p {
+  color: #627d98;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* =========================
+   OPTIONS
+========================= */
+
+.test-type-option,
+.range-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid #e0ebf3;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.test-type-option:hover,
+.range-option:hover {
+  border-color: #1479ff;
+  background: #f7fbff;
+}
+
+.test-type-option input,
+.range-option input {
+  margin-top: 4px;
+  accent-color: #1479ff;
+}
+
+.test-type-option div,
+.range-option div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.test-type-option strong,
+.range-option strong {
+  font-size: 15px;
+}
+
+.test-type-option span,
+.range-option span {
+  color: #627d98;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* =========================
+   GLUCOSE INPUT
+========================= */
+
+.glucose-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.glucose-input-group label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.glucose-input {
+  display: flex;
+  align-items: center;
+  max-width: 420px;
+  border: 1px solid #cbd9e5;
+  border-radius: 10px;
+  background: white;
+  overflow: hidden;
+}
+
+.glucose-input:focus-within {
+  border-color: #1479ff;
+  box-shadow: 0 0 0 3px rgba(20, 121, 255, 0.1);
+}
+
+.glucose-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 15px;
+  font-size: 16px;
+  min-width: 0;
+}
+
+.glucose-input span {
+  padding: 0 15px;
+  color: #627d98;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* =========================
+   LAB RANGE
+========================= */
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 500px;
+}
+
+.range-inputs input {
+  width: 140px;
+  padding: 14px;
+  border: 1px solid #cbd9e5;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+}
+
+.range-inputs input:focus {
+  border-color: #1479ff;
+  box-shadow: 0 0 0 3px rgba(20, 121, 255, 0.1);
+}
+
+.range-inputs span {
+  color: #627d98;
+  font-size: 14px;
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.form-error {
+  padding: 15px 18px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: #be123c;
+  font-size: 14px;
+}
+
+.ai-error {
+  margin-top: 18px;
+}
+
+/* =========================
+   SUBMIT
+========================= */
+
+.submit-section {
+  text-align: center;
+  padding: 15px 0 40px;
+}
+
+.analyze-button {
+  border: none;
+  background: #1479ff;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(20, 121, 255, 0.2);
+  transition: 0.25s;
+}
+
+.analyze-button:hover:not(:disabled) {
+  background: #0869e5;
+  transform: translateY(-2px);
+}
+
+.analyze-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-section > p {
+  margin-top: 15px;
+  color: #7b8fa3;
+  font-size: 13px;
+}
+
+/* =========================
+   ANALYSIS
+========================= */
+
+.analysis-section {
+  max-width: 850px;
+  margin: 20px auto 60px;
+}
+
+.analysis-section > h2 {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.analysis-section > p:not(.section-label) {
+  color: #627d98;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* =========================
+   ANALYSIS CARD
+========================= */
+
+.analysis-card {
+  padding: 25px;
+  background: white;
+  border: 1px solid #e0ebf3;
+  border-radius: 16px;
+  margin-bottom: 25px;
+}
+
+.analysis-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.analysis-main strong {
+  font-size: 17px;
+}
+
+.analysis-main span {
+  color: #52677d;
+  font-weight: 600;
+}
+
+.analysis-status {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.analysis-message {
+  color: #627d98;
+  line-height: 1.6;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status-within {
+  border-left: 5px solid #22c55e;
+}
+
+.status-within .analysis-status {
+  color: #15803d;
+}
+
+.status-below,
+.status-above {
+  border-left: 5px solid #f59e0b;
+}
+
+.status-below .analysis-status,
+.status-above .analysis-status {
+  color: #b45309;
+}
+
+.status-neutral {
+  border-left: 5px solid #94a3b8;
+}
+
+.status-neutral .analysis-status {
+  color: #64748b;
+}
+
+/* =========================
+   AI EXPLANATION SECTION
+========================= */
+
+.ai-explanation-section {
+  margin: 35px 0;
+  padding: 28px;
+  background: #f7fbff;
+  border: 1px solid #dcecf9;
+  border-radius: 18px;
+}
+
+.ai-section-header {
+  margin-bottom: 20px;
+}
+
+.ai-section-header .section-label {
+  margin-bottom: 8px;
+}
+
+.ai-section-header h2 {
+  font-size: 23px;
+  margin-bottom: 8px;
+  color: #102a43;
+}
+
+.ai-section-header p:last-child {
+  color: #627d98;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* =========================
+   AI BUTTON
+========================= */
+
+.ai-explain-button {
+  border: none;
+  background: linear-gradient(
+    135deg,
+    #1479ff,
+    #5b8def
+  );
+  color: white;
+  padding: 14px 24px;
+  border-radius: 11px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 8px 20px rgba(20, 121, 255, 0.18);
+}
+
+.ai-explain-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(20, 121, 255, 0.25);
+}
+
+.ai-explain-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================
+   AI RESULT CARD
+========================= */
+
+.ai-explanation-card {
+  margin-top: 25px;
+  padding: 28px;
+  background: white;
+  border: 1px solid #cfe3f5;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(35, 80, 120, 0.06);
+}
+
+.ai-explanation-card .section-label {
+  margin-bottom: 8px;
+}
+
+.ai-explanation-card h2 {
+  font-size: 24px;
+  margin-bottom: 18px;
+  color: #102a43;
+}
+
+.ai-explanation-text {
+  color: #52677d;
+  line-height: 1.8;
+  font-size: 15px;
+  white-space: pre-line;
+}
+
+/* =========================
+   AI NOTE
+========================= */
+
+.ai-note {
+  margin-top: 22px;
+  padding: 16px;
+  background: #eef7ff;
+  border: 1px solid #d7ebff;
+  border-radius: 10px;
+}
+
+.ai-note strong {
+  display: block;
+  color: #1479ff;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.ai-note p {
+  color: #627d98;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* =========================
+   DISCLAIMER
+========================= */
+
+.medical-disclaimer {
+  padding: 22px;
+  border-radius: 14px;
+  background: #eef7ff;
+  border: 1px solid #d7ebff;
+}
+
+.medical-disclaimer strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #1479ff;
+}
+
+.medical-disclaimer p {
+  color: #52677d;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .blood-glucose-page {
+    padding: 35px 5%;
+  }
+
+  .glucose-header h1 {
+    font-size: 36px;
+  }
+
+  .test-type-section,
+  .range-section,
+  .glucose-result-section,
+  .lab-range-section {
+    padding: 22px;
+  }
+
+  .range-inputs {
+    flex-wrap: wrap;
+  }
+
+  .range-inputs input {
+    width: 120px;
+  }
+
+  .analysis-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ai-explanation-section {
+    padding: 22px;
+  }
+
+  .ai-explanation-card {
+    padding: 22px;
+  }
+
+  .ai-explain-button {
+    width: 100%;
+  }
+}

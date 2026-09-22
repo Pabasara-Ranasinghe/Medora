@@ -1,0 +1,137 @@
+.test-results-page {
+  min-height: 100vh;
+  padding: 60px 7%;
+  background: #f7fbff;
+}
+
+.test-results-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.test-results-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.test-results-logo {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1479ff;
+  margin-bottom: 35px;
+}
+
+.section-label {
+  color: #1479ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.test-results-header h1 {
+  font-size: 42px;
+  color: #102a43;
+  margin-bottom: 15px;
+}
+
+.test-results-header > p:last-child {
+  max-width: 600px;
+  margin: auto;
+  color: #627d98;
+  line-height: 1.7;
+}
+
+.test-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.test-card {
+  padding: 30px;
+  background: white;
+  border: 1px solid #e0ebf3;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.test-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(32, 80, 120, 0.12);
+  border-color: #c9e1f7;
+}
+
+.test-icon {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eaf5ff;
+  border-radius: 15px;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.test-card h2 {
+  color: #102a43;
+  font-size: 21px;
+  margin-bottom: 7px;
+}
+
+.test-short-name {
+  display: inline-block;
+  color: #1479ff;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.test-card p {
+  color: #627d98;
+  line-height: 1.6;
+  font-size: 14px;
+  min-height: 70px;
+}
+
+.test-card button {
+  margin-top: 20px;
+  padding: 11px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #1479ff;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.medical-note {
+  max-width: 700px;
+  margin: 45px auto 0;
+  text-align: center;
+  color: #829ab1;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .test-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .test-results-page {
+    padding: 40px 5%;
+  }
+
+  .test-results-header h1 {
+    font-size: 32px;
+  }
+
+  .test-grid {
+    grid-template-columns: 1fr;
+  }
+}
