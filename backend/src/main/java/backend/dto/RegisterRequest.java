@@ -1,32 +1,16 @@
-package backend.model;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+package backend.dto;
 
 import java.time.LocalDate;
 
-@Entity
-public class User {
-
-    @Id
-    private String userId;
+public class RegisterRequest {
 
     private String name;
     private String email;
-    private String password;
-
     private LocalDate dateOfBirth;
     private String gender;
+    private String password;
 
-    public User() {
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public RegisterRequest() {
     }
 
     public String getName() {
@@ -45,14 +29,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -67,5 +43,13 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

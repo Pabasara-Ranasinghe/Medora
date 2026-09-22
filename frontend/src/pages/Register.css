@@ -1,0 +1,140 @@
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background:
+    radial-gradient(circle at 20% 20%, #dff1ff 0%, transparent 35%),
+    radial-gradient(circle at 80% 80%, #e8f5ff 0%, transparent 35%),
+    #f7fbff;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 45px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #dceaf5;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(32, 80, 120, 0.12);
+}
+
+.register-logo {
+  text-align: center;
+  color: #1479ff;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+
+.register-card h1 {
+  text-align: center;
+  color: #102a43;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.register-subtitle {
+  text-align: center;
+  color: #627d98;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.register-card .form-group {
+  margin-bottom: 18px;
+}
+
+.register-card .form-group label {
+  display: block;
+  color: #334e68;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.register-card .form-group input,
+.register-card .form-group select {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid #cbd8e3;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+  background: white;
+  color: #102a43;
+}
+
+.register-card .form-group input:focus,
+.register-card .form-group select:focus {
+  border-color: #1479ff;
+  box-shadow: 0 0 0 3px rgba(20, 121, 255, 0.1);
+}
+
+.register-card .form-group select {
+  cursor: pointer;
+}
+
+.register-button {
+  width: 100%;
+  border: none;
+  background: #1479ff;
+  color: white;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: 0.2s;
+}
+
+.register-button:hover {
+  background: #0869e5;
+}
+
+.login-text {
+  text-align: center;
+  margin-top: 25px;
+  color: #627d98;
+  font-size: 14px;
+}
+
+.login-text a {
+  color: #1479ff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.form-error {
+  color: #dc2626;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.form-success {
+  color: #16a34a;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.register-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 500px) {
+  .register-page {
+    padding: 25px 15px;
+  }
+
+  .register-card {
+    padding: 30px 25px;
+  }
+
+  .register-card h1 {
+    font-size: 26px;
+  }
+}

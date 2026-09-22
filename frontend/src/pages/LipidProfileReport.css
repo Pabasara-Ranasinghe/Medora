@@ -1,0 +1,481 @@
+* {
+  box-sizing: border-box;
+}
+
+.lipid-page {
+  min-height: 100vh;
+  padding: 50px 7%;
+  background: #f7fbff;
+  color: #102a43;
+}
+
+.lipid-header {
+  max-width: 850px;
+  margin: 0 auto 45px;
+}
+
+.back-button {
+  border: none;
+  background: transparent;
+  color: #1479ff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 35px;
+}
+
+.back-button:hover {
+  color: #0869e5;
+}
+
+.lipid-logo {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1479ff;
+  letter-spacing: -1px;
+  margin-bottom: 35px;
+}
+
+.section-label {
+  color: #1479ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.lipid-header h1 {
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+
+.lipid-header > p:last-child {
+  color: #627d98;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------
+   SECTIONS
+-------------------------------------------------- */
+
+.range-section,
+.results-section,
+.analysis-section {
+  max-width: 850px;
+  margin: 0 auto 35px;
+}
+
+.range-section {
+  background: white;
+  border: 1px solid #dceaf5;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.range-section h2,
+.section-heading h2,
+.analysis-section h2 {
+  margin: 0 0 10px;
+  font-size: 26px;
+}
+
+.range-section > p,
+.section-heading > p {
+  color: #627d98;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* --------------------------------------------------
+   RANGE OPTIONS
+-------------------------------------------------- */
+
+.range-option {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid #e0ebf3;
+  border-radius: 14px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.range-option:hover {
+  border-color: #1479ff;
+  background: #f7fbff;
+}
+
+.range-option input {
+  margin-top: 4px;
+  accent-color: #1479ff;
+}
+
+.range-option div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.range-option strong {
+  font-size: 16px;
+}
+
+.range-option span {
+  color: #627d98;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------
+   RESULTS
+-------------------------------------------------- */
+
+.section-heading {
+  margin-bottom: 25px;
+}
+
+.parameter-card {
+  background: white;
+  border: 1px solid #dceaf5;
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 18px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.parameter-info h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+
+.parameter-info span {
+  color: #627d98;
+  font-size: 14px;
+}
+
+.result-input label,
+.lab-range label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.input-with-unit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-with-unit input,
+.range-inputs input {
+  width: 100%;
+  border: 1px solid #cddce8;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 15px;
+  outline: none;
+}
+
+.input-with-unit input:focus,
+.range-inputs input:focus {
+  border-color: #1479ff;
+}
+
+.input-with-unit span {
+  color: #627d98;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.lab-range {
+  grid-column: 1 / -1;
+}
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.range-inputs span {
+  color: #627d98;
+  font-size: 14px;
+}
+
+/* --------------------------------------------------
+   ERROR
+-------------------------------------------------- */
+
+.form-error {
+  max-width: 850px;
+  margin: 0 auto 25px;
+  padding: 15px 18px;
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-radius: 12px;
+  color: #be123c;
+}
+
+/* --------------------------------------------------
+   SUBMIT
+-------------------------------------------------- */
+
+.submit-section {
+  max-width: 850px;
+  margin: 35px auto 60px;
+  text-align: center;
+}
+
+.analyze-button {
+  border: none;
+  background: #1479ff;
+  color: white;
+
+  padding: 15px 30px;
+  border-radius: 12px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 10px 25px rgba(20, 121, 255, 0.2);
+
+  transition: 0.25s;
+}
+
+.analyze-button:hover {
+  background: #0869e5;
+  transform: translateY(-2px);
+}
+
+.analyze-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-section > p {
+  color: #7b8fa3;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+/* --------------------------------------------------
+   ANALYSIS
+-------------------------------------------------- */
+
+.analysis-section {
+  background: white;
+  border: 1px solid #dceaf5;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.analysis-section > p:not(.section-label) {
+  color: #627d98;
+  line-height: 1.6;
+}
+
+.analysis-list {
+  margin-top: 25px;
+}
+
+.analysis-card {
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 15px;
+  border: 1px solid #e0ebf3;
+}
+
+.analysis-card > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.analysis-card strong {
+  font-size: 16px;
+}
+
+.analysis-card > div span {
+  color: #52677d;
+  font-size: 14px;
+}
+
+.analysis-status {
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.analysis-message {
+  color: #627d98;
+  line-height: 1.5;
+  margin: 5px 0 0;
+}
+
+/* --------------------------------------------------
+   STATUS COLORS
+-------------------------------------------------- */
+
+.status-within {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.status-within .analysis-status {
+  color: #15803d;
+}
+
+.status-below,
+.status-above {
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
+
+.status-below .analysis-status,
+.status-above .analysis-status {
+  color: #c2410c;
+}
+
+.status-neutral {
+  background: #f8fafc;
+}
+
+/* --------------------------------------------------
+   AI EXPLANATION
+-------------------------------------------------- */
+
+.ai-explanation-section {
+  margin-top: 30px;
+}
+
+.ai-explain-button {
+  width: 100%;
+
+  padding: 15px 20px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #1479ff;
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.ai-explain-button:hover {
+  background: #0869e5;
+  transform: translateY(-1px);
+}
+
+.ai-explain-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+}
+
+.ai-explanation-card {
+  margin-top: 20px;
+
+  padding: 25px;
+
+  border-radius: 16px;
+
+  background: #f7fbff;
+
+  border: 1px solid #dceaf5;
+}
+
+.ai-explanation-card h2 {
+  margin-bottom: 15px;
+  color: #102a43;
+}
+
+.ai-explanation-card p:last-child {
+  margin: 0;
+
+  color: #52677d;
+
+  line-height: 1.7;
+
+  white-space: pre-line;
+}
+
+/* --------------------------------------------------
+   MEDICAL DISCLAIMER
+-------------------------------------------------- */
+
+.medical-disclaimer {
+  margin-top: 30px;
+
+  padding: 20px;
+
+  background: #f7fbff;
+
+  border: 1px solid #dceaf5;
+
+  border-radius: 14px;
+}
+
+.medical-disclaimer strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.medical-disclaimer p {
+  margin: 0;
+
+  color: #627d98;
+
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------
+   MOBILE
+-------------------------------------------------- */
+
+@media (max-width: 700px) {
+
+  .lipid-page {
+    padding: 35px 5%;
+  }
+
+  .parameter-card {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-range {
+    grid-column: auto;
+  }
+
+  .analysis-card > div {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .range-section,
+  .analysis-section {
+    padding: 22px;
+  }
+
+  .ai-explain-button {
+    font-size: 15px;
+  }
+}

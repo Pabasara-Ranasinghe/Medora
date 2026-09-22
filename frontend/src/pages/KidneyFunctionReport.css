@@ -1,0 +1,906 @@
+/* ========================================
+   RESET
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ========================================
+   PAGE
+======================================== */
+
+.kidney-page {
+  min-height: 100vh;
+
+  padding: 50px 7%;
+
+  background: #f7fbff;
+
+  color: #102a43;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.kidney-header {
+  max-width: 850px;
+
+  margin: 0 auto 45px;
+}
+
+.back-button {
+  border: none;
+
+  background: none;
+
+  color: #1479ff;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 0;
+
+  margin-bottom: 35px;
+}
+
+.back-button:hover {
+  color: #0869e5;
+}
+
+.kidney-logo {
+  font-size: 30px;
+
+  font-weight: 800;
+
+  color: #1479ff;
+
+  margin-bottom: 25px;
+
+  letter-spacing: -1px;
+}
+
+.section-label {
+  color: #1479ff;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 15px;
+}
+
+.kidney-header h1 {
+  font-size: 44px;
+
+  line-height: 1.15;
+
+  letter-spacing: -1px;
+
+  margin-bottom: 18px;
+}
+
+.kidney-header > p:last-child {
+  color: #627d98;
+
+  font-size: 17px;
+
+  line-height: 1.6;
+}
+
+
+/* ========================================
+   FORM
+======================================== */
+
+.kidney-page form {
+  max-width: 850px;
+
+  margin: 0 auto;
+}
+
+
+/* ========================================
+   COMMON SECTIONS
+======================================== */
+
+.range-section,
+.results-section {
+  background: white;
+
+  border: 1px solid #e0ebf3;
+
+  border-radius: 18px;
+
+  padding: 30px;
+
+  margin-bottom: 25px;
+}
+
+.range-section h2,
+.results-section h2 {
+  font-size: 22px;
+
+  margin-bottom: 10px;
+}
+
+.range-section > p,
+.section-heading > p {
+  color: #627d98;
+
+  line-height: 1.6;
+
+  margin-bottom: 25px;
+}
+
+
+/* ========================================
+   REFERENCE RANGE OPTIONS
+======================================== */
+
+.range-option {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 14px;
+
+  padding: 18px;
+
+  border: 1px solid #e0ebf3;
+
+  border-radius: 12px;
+
+  margin-bottom: 12px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.range-option:hover {
+  border-color: #1479ff;
+
+  background: #f7fbff;
+}
+
+.range-option input {
+  margin-top: 4px;
+
+  accent-color: #1479ff;
+}
+
+.range-option div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.range-option strong {
+  font-size: 15px;
+}
+
+.range-option span {
+  color: #627d98;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   RESULTS SECTION
+======================================== */
+
+.results-section {
+  background: transparent;
+
+  border: none;
+
+  padding: 0;
+}
+
+.section-heading {
+  margin-bottom: 25px;
+}
+
+.section-heading h2 {
+  font-size: 22px;
+
+  margin-bottom: 10px;
+}
+
+
+/* ========================================
+   PARAMETER CARD
+======================================== */
+
+.parameter-card {
+  background: white;
+
+  border: 1px solid #e0ebf3;
+
+  border-radius: 16px;
+
+  padding: 25px;
+
+  margin-bottom: 18px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 25px;
+
+  transition: 0.2s;
+}
+
+.parameter-card:hover {
+  border-color: #c8dceb;
+
+  box-shadow:
+    0 5px 18px
+    rgba(16, 42, 67, 0.04);
+}
+
+
+/* ========================================
+   PARAMETER INFORMATION
+======================================== */
+
+.parameter-info h3 {
+  margin: 0 0 8px;
+
+  font-size: 17px;
+}
+
+.parameter-info span {
+  color: #627d98;
+
+  font-size: 14px;
+}
+
+
+/* ========================================
+   INPUTS
+======================================== */
+
+.result-input {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.result-input label,
+.lab-range label {
+  display: block;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+/* ========================================
+   INPUT WITH UNIT
+======================================== */
+
+.input-with-unit {
+  display: flex;
+
+  align-items: center;
+
+  max-width: 420px;
+
+  border: 1px solid #cbd9e5;
+
+  border-radius: 10px;
+
+  background: white;
+
+  overflow: hidden;
+}
+
+.input-with-unit:focus-within {
+  border-color: #1479ff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(20, 121, 255, 0.1);
+}
+
+.input-with-unit input {
+  flex: 1;
+
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  padding: 15px;
+
+  font-size: 16px;
+
+  min-width: 0;
+
+  background: transparent;
+
+  color: #102a43;
+}
+
+.input-with-unit input::placeholder {
+  color: #9aaabd;
+}
+
+.input-with-unit span {
+  padding: 0 15px;
+
+  color: #627d98;
+
+  font-size: 14px;
+
+  white-space: nowrap;
+}
+
+
+/* ========================================
+   GENDER SELECT
+======================================== */
+
+.result-input select {
+  width: 100%;
+
+  max-width: 420px;
+
+  height: 48px;
+
+  border: 1px solid #cbd9e5;
+
+  border-radius: 10px;
+
+  padding: 12px 14px;
+
+  font-size: 15px;
+
+  outline: none;
+
+  background: white;
+
+  color: #102a43;
+
+  cursor: pointer;
+}
+
+.result-input select:focus {
+  border-color: #1479ff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(20, 121, 255, 0.1);
+}
+
+
+/* ========================================
+   LABORATORY RANGE
+======================================== */
+
+.lab-range {
+  grid-column: 1 / -1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.range-inputs {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  max-width: 500px;
+}
+
+.range-inputs input {
+  width: 140px;
+
+  padding: 14px;
+
+  border: 1px solid #cbd9e5;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  font-size: 15px;
+
+  background: white;
+
+  color: #102a43;
+}
+
+.range-inputs input:focus {
+  border-color: #1479ff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(20, 121, 255, 0.1);
+}
+
+.range-inputs span {
+  color: #627d98;
+
+  font-size: 14px;
+}
+
+
+/* ========================================
+   ERROR
+======================================== */
+
+.form-error {
+  max-width: 850px;
+
+  padding: 15px 18px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 10px;
+
+  background: #fff1f2;
+
+  border: 1px solid #fecdd3;
+
+  color: #be123c;
+
+  font-size: 14px;
+}
+
+
+/* ========================================
+   SUBMIT
+======================================== */
+
+.submit-section {
+  max-width: 850px;
+
+  margin: 0 auto;
+
+  text-align: center;
+
+  padding: 15px 0 40px;
+}
+
+.analyze-button {
+  border: none;
+
+  background: #1479ff;
+
+  color: white;
+
+  padding: 15px 30px;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px
+    rgba(20, 121, 255, 0.2);
+
+  transition: 0.25s;
+}
+
+.analyze-button:hover:not(:disabled) {
+  background: #0869e5;
+
+  transform: translateY(-2px);
+}
+
+.analyze-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+.submit-section > p {
+  margin-top: 15px;
+
+  color: #7b8fa3;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   ANALYSIS SECTION
+======================================== */
+
+.analysis-section {
+  max-width: 850px;
+
+  margin: 20px auto 60px;
+
+  background: white;
+
+  border: 1px solid #e0ebf3;
+
+  border-radius: 18px;
+
+  padding: 30px;
+}
+
+.analysis-section h2 {
+  font-size: 30px;
+
+  margin-bottom: 12px;
+}
+
+.analysis-introduction {
+  color: #627d98;
+
+  line-height: 1.6;
+
+  margin-bottom: 25px;
+}
+
+
+/* ========================================
+   ANALYSIS RESULTS
+======================================== */
+
+.analysis-results {
+  margin-top: 25px;
+}
+
+
+/* ========================================
+   ANALYSIS CARD
+======================================== */
+
+.analysis-card {
+  padding: 25px;
+
+  background: white;
+
+  border: 1px solid #e0ebf3;
+
+  border-radius: 16px;
+
+  margin-bottom: 18px;
+
+  transition: 0.2s;
+}
+
+.analysis-card:hover {
+  box-shadow:
+    0 5px 18px
+    rgba(16, 42, 67, 0.05);
+}
+
+.analysis-card h3 {
+  font-size: 17px;
+
+  color: #102a43;
+}
+
+.analysis-card p {
+  color: #627d98;
+
+  line-height: 1.6;
+
+  margin-bottom: 15px;
+}
+
+
+/* ========================================
+   ANALYSIS CARD HEADER
+======================================== */
+
+.analysis-card-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 12px;
+}
+
+.analysis-card-header span {
+  display: inline-block;
+
+  padding: 6px 10px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* ========================================
+   STATUS COLORS
+======================================== */
+
+.analysis-card.status-within {
+  border-left: 5px solid #22c55e;
+
+  background: #f8fff9;
+}
+
+.analysis-card.status-within
+.analysis-card-header span {
+  background: #ecfdf3;
+
+  color: #15803d;
+}
+
+
+.analysis-card.status-below {
+  border-left: 5px solid #f59e0b;
+
+  background: #fffdf5;
+}
+
+.analysis-card.status-below
+.analysis-card-header span {
+  background: #fff7df;
+
+  color: #b45309;
+}
+
+
+.analysis-card.status-above {
+  border-left: 5px solid #ef4444;
+
+  background: #fff8f8;
+}
+
+.analysis-card.status-above
+.analysis-card-header span {
+  background: #fff1f2;
+
+  color: #be123c;
+}
+
+
+.analysis-card.status-neutral {
+  border-left: 5px solid #39759f;
+
+  background: #fafafa;
+}
+
+.analysis-card.status-neutral
+.analysis-card-header span {
+  background: #f1f5f9;
+
+  color: #64748b;
+}
+
+
+/* ========================================
+   AI EXPLANATION
+======================================== */
+
+.ai-explanation-section {
+  margin-top: 30px;
+}
+
+
+/* ========================================
+   AI BUTTON
+======================================== */
+
+.ai-explain-button {
+  border: none;
+
+  background: #1479ff;
+
+  color: white;
+
+  padding: 15px 30px;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px
+    rgba(20, 121, 255, 0.2);
+
+  transition: 0.25s;
+}
+
+.ai-explain-button:hover:not(:disabled) {
+  background: #0869e5;
+
+  transform: translateY(-2px);
+}
+
+.ai-explain-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* ========================================
+   AI ERROR
+======================================== */
+
+.ai-explanation-section
+.form-error {
+  margin-top: 18px;
+
+  margin-bottom: 0;
+}
+
+
+/* ========================================
+   AI EXPLANATION CARD
+======================================== */
+
+.ai-explanation-card {
+  margin-top: 25px;
+
+  padding: 28px;
+
+  background: #f7fbff;
+
+  border: 1px solid #d7ebff;
+
+  border-radius: 16px;
+}
+
+.ai-explanation-card .section-label {
+  margin-bottom: 12px;
+}
+
+.ai-explanation-card h2 {
+  font-size: 24px;
+
+  margin-bottom: 15px;
+
+  color: #102a43;
+}
+
+.ai-explanation-card p:last-child {
+  color: #52677d;
+
+  line-height: 1.7;
+
+  margin: 0;
+}
+
+
+/* ========================================
+   MEDICAL DISCLAIMER
+======================================== */
+
+.medical-disclaimer {
+  margin-top: 30px;
+
+  padding: 22px;
+
+  border-radius: 14px;
+
+  background: #eef7ff;
+
+  border: 1px solid #d7ebff;
+}
+
+.medical-disclaimer strong {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #1479ff;
+}
+
+.medical-disclaimer p {
+  margin: 0;
+
+  color: #52677d;
+
+  line-height: 1.6;
+
+  font-size: 14px;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 700px) {
+
+  .kidney-page {
+    padding: 35px 5%;
+  }
+
+  .kidney-header h1 {
+    font-size: 36px;
+  }
+
+  .range-section,
+  .analysis-section {
+    padding: 22px;
+  }
+
+  .parameter-card {
+    grid-template-columns: 1fr;
+
+    padding: 22px;
+  }
+
+  .lab-range {
+    grid-column: auto;
+  }
+
+  .range-inputs {
+    flex-wrap: wrap;
+  }
+
+  .range-inputs input {
+    width: 120px;
+  }
+
+  .analysis-card-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .input-with-unit,
+  .result-input select {
+    max-width: 100%;
+  }
+
+  .ai-explain-button {
+    width: 100%;
+  }
+
+  .ai-explanation-card {
+    padding: 22px;
+  }
+
+}

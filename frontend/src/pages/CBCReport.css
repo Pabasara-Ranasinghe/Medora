@@ -1,0 +1,564 @@
+/* =========================
+   CBC PAGE
+========================= */
+
+.cbc-container {
+  min-height: 100vh;
+  padding: 40px 8%;
+  background: #f7fafc;
+  color: #18312b;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.cbc-header {
+  max-width: 900px;
+  margin: 0 auto 40px;
+}
+
+.back-button {
+  border: none;
+  background: transparent;
+  color: #52756c;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.back-button:hover {
+  color: #18312b;
+}
+
+.cbc-logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: #18312b;
+  margin-bottom: 30px;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #5f8fb2;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.cbc-header h1 {
+  font-size: 42px;
+  margin: 0 0 14px;
+  line-height: 1.2;
+}
+
+.cbc-header > p:last-child {
+  color: #6b7f79;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.cbc-container form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   REFERENCE RANGE SECTION
+========================= */
+
+.range-section {
+  background: white;
+  border: 1px solid #dfe8ee;
+  border-radius: 18px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.range-section h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.range-section > p {
+  margin: 0 0 25px;
+  color: #71837e;
+  line-height: 1.5;
+}
+
+.range-option {
+  display: flex;
+  gap: 15px;
+  padding: 18px;
+  border: 1px solid #dfe8ee;
+  border-radius: 12px;
+  margin-top: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.range-option:hover {
+  border-color: #8fb8d2;
+  background: #f7fbfe;
+}
+
+.range-option input {
+  margin-top: 4px;
+  accent-color: #4f8fbf;
+}
+
+.range-option div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.range-option strong {
+  font-size: 15px;
+}
+
+.range-option span {
+  font-size: 14px;
+  color: #71837e;
+  line-height: 1.5;
+}
+
+
+/* =========================
+   RESULTS SECTION
+========================= */
+
+.results-section {
+  margin-bottom: 30px;
+}
+
+.section-heading {
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  font-size: 24px;
+  margin: 0 0 6px;
+}
+
+.section-heading p {
+  color: #71837e;
+  margin: 0;
+}
+
+
+/* =========================
+   PARAMETER CARD
+========================= */
+
+.parameter-card {
+  background: white;
+  border: 1px solid #dfe8ee;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 14px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.parameter-info h3 {
+  margin: 0 0 7px;
+  font-size: 17px;
+}
+
+.parameter-info span {
+  font-size: 13px;
+  color: #7b8e89;
+}
+
+.result-input label,
+.lab-range label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #526b64;
+}
+
+.input-with-unit {
+  display: flex;
+  align-items: center;
+}
+
+.input-with-unit input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid #d2e0e8;
+  border-radius: 10px 0 0 10px;
+  outline: none;
+  font-size: 15px;
+}
+
+.input-with-unit input:focus {
+  border-color: #4f8fbf;
+}
+
+.input-with-unit span {
+  background: #eef5f9;
+  border: 1px solid #d2e0e8;
+  border-left: none;
+  padding: 12px;
+  border-radius: 0 10px 10px 0;
+  font-size: 12px;
+  color: #657a74;
+  white-space: nowrap;
+}
+
+
+/* =========================
+   LAB RANGE
+========================= */
+
+.lab-range {
+  grid-column: 1 / -1;
+  padding-top: 18px;
+  border-top: 1px solid #edf1ef;
+}
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.range-inputs input {
+  width: 130px;
+  padding: 11px 12px;
+  border: 1px solid #d2e0e8;
+  border-radius: 9px;
+  outline: none;
+}
+
+.range-inputs input:focus {
+  border-color: #4f8fbf;
+}
+
+.range-inputs span {
+  color: #71837e;
+}
+
+
+/* =========================
+   SUBMIT SECTION
+========================= */
+
+.submit-section {
+  text-align: center;
+  padding: 15px 0 45px;
+}
+
+.analyze-button {
+  border: none;
+  border-radius: 11px;
+  background: #4f8fbf;
+  color: white;
+  padding: 14px 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.analyze-button:hover {
+  background: #39759f;
+}
+
+.analyze-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-section p {
+  margin-top: 14px;
+  font-size: 12px;
+  color: #81918d;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.form-error {
+  background: #fff2f2;
+  border: 1px solid #edcccc;
+  color: #9b4444;
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin: 0 auto 20px;
+  max-width: 900px;
+}
+
+
+/* =========================
+   ANALYSIS SECTION
+========================= */
+
+.analysis-section {
+  max-width: 900px;
+  margin: 20px auto 60px;
+  background: white;
+  border: 1px solid #dfe8ee;
+  border-radius: 20px;
+  padding: 35px;
+}
+
+.analysis-section h2 {
+  margin: 0 0 8px;
+  font-size: 27px;
+}
+
+.analysis-section > p:not(.section-label) {
+  color: #71837e;
+  margin-bottom: 25px;
+}
+
+
+/* =========================
+   ANALYSIS CARDS
+========================= */
+
+.analysis-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.analysis-card {
+  border: 1px solid #e0e9e6;
+  border-radius: 13px;
+  padding: 18px 20px;
+  background: #fbfcfc;
+  transition: 0.2s ease;
+}
+
+.analysis-card > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.analysis-card strong {
+  font-size: 15px;
+}
+
+.analysis-card span {
+  font-size: 14px;
+  color: #6d817b;
+}
+
+
+/* =========================
+   WITHIN RANGE
+========================= */
+
+.analysis-card.status-within {
+  border-left: 5px solid #4f8fbf;
+  background: #eef7fc;
+  border-top-color: #dcecf5;
+  border-right-color: #dcecf5;
+  border-bottom-color: #dcecf5;
+}
+
+.analysis-card.status-within strong {
+  color: #39759f;
+}
+
+.analysis-card.status-within .analysis-status {
+  color: #39759f;
+}
+
+
+/* =========================
+   BELOW RANGE
+========================= */
+
+.analysis-card.status-below {
+  border-left: 5px solid #d6a600;
+  background: #fff9e6;
+  border-top-color: #f0e3b5;
+  border-right-color: #f0e3b5;
+  border-bottom-color: #f0e3b5;
+}
+
+.analysis-card.status-below strong {
+  color: #967400;
+}
+
+.analysis-card.status-below .analysis-status {
+  color: #967400;
+}
+
+
+/* =========================
+   ABOVE RANGE
+========================= */
+
+.analysis-card.status-above {
+  border-left: 5px solid #d9534f;
+  background: #fff2f2;
+  border-top-color: #f0d2d2;
+  border-right-color: #f0d2d2;
+  border-bottom-color: #f0d2d2;
+}
+
+.analysis-card.status-above strong {
+  color: #b63b38;
+}
+
+.analysis-card.status-above .analysis-status {
+  color: #b63b38;
+}
+
+
+/* =========================
+   STATUS TEXT
+========================= */
+
+.analysis-status {
+  margin: 10px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.analysis-message {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #647773;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   MEDICAL DISCLAIMER
+========================= */
+
+.medical-disclaimer {
+  margin-top: 25px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f5f8fa;
+  border: 1px solid #dce7ed;
+}
+
+.medical-disclaimer strong {
+  font-size: 14px;
+  color: #39759f;
+}
+
+.medical-disclaimer p {
+  margin: 8px 0 0;
+  color: #6f807b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .cbc-container {
+    padding: 25px 18px;
+  }
+
+  .cbc-header h1 {
+    font-size: 32px;
+  }
+
+  .parameter-card {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .lab-range {
+    grid-column: auto;
+  }
+
+  .analysis-section {
+    padding: 25px 18px;
+  }
+
+  .analysis-card > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .range-inputs input {
+    width: 100%;
+  }
+
+  .range-inputs {
+    width: 100%;
+  }
+}
+
+/* =========================
+   AI EXPLANATION
+========================= */
+
+.ai-explanation-section {
+  margin-top: 30px;
+}
+
+.ai-explain-button {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 12px;
+  background: #4f8fbf;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.ai-explain-button:hover {
+  background: #39759f;
+}
+
+.ai-explain-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.ai-explanation-card {
+  margin-top: 24px;
+  padding: 25px;
+  border-radius: 16px;
+  background: #f5f9fc;
+  border: 1px solid #dce7ed;
+}
+
+.ai-explanation-card h2 {
+  margin-bottom: 16px;
+  color: #18312b;
+}
+
+.ai-explanation-card > p:last-child {
+  color: #5f706b;
+  line-height: 1.7;
+  white-space: pre-line;
+}
