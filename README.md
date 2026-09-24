@@ -283,7 +283,7 @@ Second Year Software Engineering Undergraduate
 
 Interested in **AI, Frontend Development, Full-Stack Development, and Software Engineering**.
 
-**GitHub:** `PabasaraRanasinghe216`
+🔗 **GitHub Repository:** [Pabasara-Ranasinghe/Medora](https://github.com/Pabasara-Ranasinghe/Medora)
 
 ---
 
