@@ -1,8 +1,10 @@
 # 🩺 Medora — AI-Powered Health Guidance Platform
 
-Medora is a full-stack healthcare web application designed to help users understand their laboratory results through **structured report analysis and AI-powered health guidance**.
+Medora is a full-stack healthcare web application designed to help users understand their laboratory results through structured report analysis and AI-powered health guidance. Built with React, Spring Boot, MySQL, and Groq AI, Medora combines modern full-stack development with AI to provide a simple and user-friendly health information experience.
 
-Built with **React, Spring Boot, MySQL, and Groq AI**, Medora combines modern full-stack development with AI to provide a simple and user-friendly health information experience.
+The platform allows users to enter laboratory test results, compare values against reference ranges, and receive easy-to-understand explanations of their results. Medora supports multiple laboratory tests, including CBC, Blood Glucose, Lipid Profile, LFT, RFT, and TFT, while providing a structured workflow from result entry to AI-generated guidance.
+
+The project was developed to explore how AI and modern web technologies can be combined to make complex health information easier to understand, while keeping the user experience simple and accessible.
 
 > ⚠️ **Disclaimer:** Medora is an educational and informational project. Its results and AI-generated guidance are not medical diagnoses or professional medical advice.
 
@@ -10,140 +12,131 @@ Built with **React, Spring Boot, MySQL, and Groq AI**, Medora combines modern fu
 
 ## ✨ Features
 
-* 🔐 Secure user registration and login
-* 🔑 JWT-based authentication
+* 🔐 User registration and JWT-based authentication
 * 🧠 AI-powered health guidance using Groq
 * 📋 Health report creation and management
-* 📊 Support for Medora and laboratory-specific reference ranges
-* 🔒 Environment-based protection for sensitive credentials
+* 🧪 Laboratory result analysis
+* 📊 Medora and laboratory-specific reference ranges
+* 🔒 Secure environment-based configuration
+
+### Supported Laboratory Tests
+
+| Test             | Analysis                       |
+| ---------------- | ------------------------------ |
+| 🩸 CBC           | Complete Blood Count           |
+| 🩸 Blood Glucose | Glucose analysis               |
+| ❤️ Lipid Profile | Cholesterol and lipid analysis |
+| 🧪 LFT           | Liver Function Test            |
+| 🧪 RFT           | Kidney / Renal Function Test   |
+| 🦋 TFT           | Thyroid Function Test          |
 
 ---
 
 # 📸 Screenshots
 
-## 🏠 Home Page
+## 🏠 Home
 
-The Medora home page provides an overview of the platform and access to its health analysis features.
+The landing page provides an overview of Medora and access to its health analysis features.
 
-<img width="1405" height="868" alt="Screenshot 2026-09-24 145941" src="https://github.com/user-attachments/assets/039a8019-313f-45bd-ac33-1790e9735404" />
+<img width="1405" height="868" alt="Medora Home" src="https://github.com/user-attachments/assets/039a8019-313f-45bd-ac33-1790e9735404" />
 
----
+## 🔐 Authentication
 
-## 🔐 Login
-
-Users can securely sign in to access their personalized health information and reports.
+### Login
 
 <img width="690" height="777" alt="Medora Login" src="https://github.com/user-attachments/assets/4a7f7479-ff8c-4a69-8296-809a49630cb8" />
 
----
+### Create Account
 
-## 📝 Create an Account
+<img width="1403" height="867" alt="Create Account" src="https://github.com/user-attachments/assets/443324af-e44e-4050-9f5d-d2ddb762d8f9" />
 
-New users can create a Medora account to access the laboratory analysis and AI health guidance features.
-
-<div align="center"><img width="1403" height="867" alt="Create Account" src="https://github.com/user-attachments/assets/443324af-e44e-4050-9f5d-d2ddb762d8f9" />
-<img width="1407" height="456" alt="Create Account Form" src="https://github.com/user-attachments/assets/c9e02ab7-3aaa-44cb-a409-94e90cdad2aa" /></div>
-
-
----
+<img width="1407" height="456" alt="Create Account Form" src="https://github.com/user-attachments/assets/c9e02ab7-3aaa-44cb-a409-94e90cdad2aa" />
 
 ## 📊 Health Reports
 
-Users can access the available laboratory report categories and select the type of test they want to analyze.
+Users can select from the available laboratory test categories and begin an analysis.
 
 <img width="1402" height="747" alt="Health Reports" src="https://github.com/user-attachments/assets/64377264-ee9e-409b-92e6-4e18b30c5626" />
 
 ---
 
-# 🩸 Blood Glucose Analysis — Example
+# 🩸 Laboratory Analysis — Example
 
-The Blood Glucose module demonstrates how Medora processes laboratory results using reference ranges.
+The Blood Glucose module demonstrates Medora's laboratory analysis workflow.
 
-### 1. Select the Analysis
-
-Users can select **Blood Glucose** from the available laboratory report categories.
+### Select a Test
 
 <img width="1407" height="862" alt="Blood Glucose Analysis" src="https://github.com/user-attachments/assets/afae9090-a84b-49d5-8842-5de1f8f3ff3f" />
 
-<img width="1406" height="475" alt="Blood Glucose Reference Selection" src="https://github.com/user-attachments/assets/77244e0d-4494-4405-bb74-6438de7db58f" />
+### Choose Reference Ranges
 
-### 2. Enter Laboratory Values
+Users can select **Medora reference values** or provide **laboratory-specific reference values**.
 
-Users can enter the values from their laboratory report into the corresponding fields.
+<img width="1406" height="475" alt="Reference Range Selection" src="https://github.com/user-attachments/assets/77244e0d-4494-4405-bb74-6438de7db58f" />
 
-<img width="1407" height="502" alt="Enter Blood Glucose Values" src="https://github.com/user-attachments/assets/84c1b6b4-96c2-48d2-b85b-4dae59c0df09" />
+### Enter Results
 
-### 3. Below the Reference Range
+Users enter values from their laboratory report for analysis.
 
-When a value is below the selected reference range, Medora identifies the result accordingly.
+<img width="1407" height="502" alt="Enter Laboratory Values" src="https://github.com/user-attachments/assets/84c1b6b4-96c2-48d2-b85b-4dae59c0df09" />
 
-<img width="1406" height="493" alt="Screenshot 2026-09-24 133010" src="https://github.com/user-attachments/assets/a331251b-5b66-4c03-8934-b6aea426e215" />
+### Result Interpretation
 
+Values are categorized according to the selected reference range.
 
-### 4. Within the Reference Range
+**Below Range**
 
-When a value falls within the selected reference range, Medora identifies it as being within the expected range.
+<img width="1406" height="493" alt="Below Reference Range" src="https://github.com/user-attachments/assets/a331251b-5b66-4c03-8934-b6aea426e215" />
+
+**Within Range**
 
 <img width="1405" height="492" alt="Within Reference Range" src="https://github.com/user-attachments/assets/a59223da-d07e-419b-840c-5801a508930d" />
 
-### 5. Above the Reference Range
-
-When a value is above the selected reference range, Medora identifies the result accordingly.
+**Above Range**
 
 <img width="1405" height="553" alt="Above Reference Range" src="https://github.com/user-attachments/assets/c94e467e-43a7-439a-a6b8-f9f0e36c95ce" />
-
-### Reference Range Selection
-
-Users can choose between **Medora reference values** and **laboratory-provided reference values**, allowing the analysis to be adapted to the reference ranges used by their laboratory.
 
 ---
 
 # 🧠 AI Health Guidance
 
-After analyzing laboratory results, Medora provides AI-powered guidance to help users better understand their results.
+Medora uses Groq AI to generate easy-to-understand explanations based on analyzed health information.
 
-The AI-generated information is presented in a simple and accessible format.
+<img width="1407" height="797" alt="AI Health Guidance" src="https://github.com/user-attachments/assets/f050b1e3-0e28-49cf-bb6b-a6f0b592b791" />
 
-<img width="1407" height="797" alt="Screenshot 2026-09-24 194155" src="https://github.com/user-attachments/assets/f050b1e3-0e28-49cf-bb6b-a6f0b592b791" />
-
-<img width="1407" height="866" alt="Screenshot 2026-09-24 194237" src="https://github.com/user-attachments/assets/15a0b183-3eab-4c88-97de-d81758e7b75e" />
-
-
----
-
-# 🔄 How It Works
-
-```text
-                         User
-                           │
-                           ▼
-                   React Frontend
-                           │
-                           ▼
-                      REST APIs
-                           │
-                           ▼
-                  Spring Boot Backend
-                    ┌──────┴──────┐
-                    │             │
-                    ▼             ▼
-              MySQL Database    Groq AI
-                                  │
-                                  ▼
-                           AI Health Guidance
-                                  │
-                                  ▼
-                           React Frontend
-                                  │
-                                  ▼
-                                User
-```
+<img width="1407" height="866" alt="AI Health Guidance Details" src="https://github.com/user-attachments/assets/15a0b183-3eab-4c88-97de-d81758e7b75e" />
 
 ---
 
 # 🏗️ Architecture
 
-## Frontend
+```text
+                    User
+                      │
+                      ▼
+              React + Vite
+                      │
+                  REST API
+                      │
+                      ▼
+             Spring Boot Backend
+                ┌─────┴─────┐
+                ▼           ▼
+             MySQL       Groq AI
+                │           │
+                └─────┬─────┘
+                      ▼
+                Health Guidance
+                      │
+                      ▼
+                  React UI
+```
+
+---
+
+# 🛠️ Tech Stack
+
+### Frontend
 
 * React.js
 * Vite
@@ -151,26 +144,26 @@ The AI-generated information is presented in a simple and accessible format.
 * CSS
 * React Router
 
-## Backend
+### Backend
 
 * Java
 * Spring Boot
 * Spring Data JPA
 * REST APIs
-* JWT Authentication
+* JWT
 * BCrypt
 
-## Database
+### Database
 
 * MySQL
 * Hibernate / JPA
 
-## AI
+### AI
 
 * Groq API
 * `openai/gpt-oss-120b`
 
-## Development Tools
+### Tools
 
 * Git & GitHub
 * VS Code
@@ -179,77 +172,25 @@ The AI-generated information is presented in a simple and accessible format.
 
 ---
 
-# 🧪 Laboratory Report Analysis
+# 🔐 Security
 
-Medora currently supports six laboratory report categories:
+* JWT-based authentication
+* BCrypt password hashing
+* Protected backend resources
+* Environment-based API key configuration
+* User-specific health information
 
-| Report           | Description                    |
-| ---------------- | ------------------------------ |
-| 🩸 CBC           | Complete Blood Count           |
-| 🩸 Blood Glucose | Blood glucose analysis         |
-| ❤️ Lipid Profile | Cholesterol and lipid analysis |
-| 🧪 LFT           | Liver Function Test            |
-| 🧪 RFT           | Kidney / Renal Function Test   |
-| 🦋 TFT           | Thyroid Function Test          |
-
-Users can enter their laboratory results and, where supported, choose between **Medora reference values** and **laboratory-provided reference values**.
-
-The application compares entered values against the selected reference ranges and identifies results such as **Low, Normal, or High**.
-
----
-
-# 🔌 API
-
-The Spring Boot backend provides REST APIs for the application's main modules:
-
-| Module         | Purpose                        |
-| -------------- | ------------------------------ |
-| Authentication | User registration and login    |
-| Reports        | Health report management       |
-| CBC            | Complete Blood Count analysis  |
-| Blood Glucose  | Glucose result analysis        |
-| Lipid Profile  | Lipid result analysis          |
-| LFT            | Liver function analysis        |
-| RFT            | Kidney function analysis       |
-| TFT            | Thyroid function analysis      |
-| AI             | AI-powered health guidance     |
-| User           | Authenticated user information |
-
-Backend:
-
-```text
-http://localhost:8081
-```
-
----
-
-# 🔑 Environment Configuration
-
-Sensitive credentials are **not stored in the repository**.
-
-Medora uses environment variables for sensitive configuration:
-
-```text
-DB_USERNAME
-DB_PASSWORD
-GROQ_API_KEY
-```
-
-A safe configuration example is provided in:
-
-```text
-backend/src/main/resources/application-example.properties
-```
-
-> ⚠️ Never commit database passwords, API keys, or other sensitive credentials to GitHub.
+> API keys and database credentials are managed through environment variables and are not included in the repository.
 
 ---
 
 # 🚀 Getting Started
 
-## Prerequisites
+Follow the steps below to run Medora locally.
 
-Make sure you have the following installed:
+### Prerequisites
+
+Make sure the following are installed:
 
 * Java 17+
 * Maven
@@ -257,74 +198,68 @@ Make sure you have the following installed:
 * MySQL 8+
 * Groq API key
 
-## Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/PabasaraRanasinghe216/Medora.git
 cd Medora
 ```
 
-## Create the Database
+### 2. Create the Database
 
-Create the MySQL database:
+Open MySQL and create the Medora database:
 
 ```sql
 CREATE DATABASE medora;
 ```
 
-Configure the required environment variables before starting the application.
+### 3. Configure Environment Variables
 
-## Start the Backend
+Configure the required environment variables:
+
+```text
+DB_USERNAME=your_mysql_username
+DB_PASSWORD=your_mysql_password
+GROQ_API_KEY=your_groq_api_key
+```
+
+> 🔐 API keys and database credentials are managed through environment variables and are not included in the repository.
+
+### 4. Start the Backend
+
+Open a terminal in the backend directory:
 
 ```bash
 cd backend
 mvn spring-boot:run
 ```
 
-The backend runs on:
+The backend will run at:
 
 ```text
 http://localhost:8081
 ```
 
-## Start the Frontend
+### 5. Install Frontend Dependencies
 
-Open another terminal:
+Open another terminal and navigate to the frontend:
 
 ```bash
 cd frontend
 npm install
+```
+
+### 6. Start the Frontend
+
+```bash
 npm run dev
 ```
 
----
+Vite will display the local development URL in the terminal.
 
-# 🔒 Security
+### 7. Open Medora
 
-Medora includes several security measures:
-
-* JWT-based authentication
-* BCrypt password hashing
-* Protected backend resources
-* Environment-based API key configuration
-* Local application configuration excluded from Git
-* User-specific health information
-
----
-
-# 🎯 Project Goals
-
-Medora was developed to explore how **AI and full-stack web development** can be combined to create practical healthcare applications.
-
-The project provides hands-on experience with:
-
-* Full-stack web development
-* REST API development
-* Authentication and security
-* Database integration
-* AI API integration
-* Laboratory-result processing
-* User-focused interface design
+Open the URL provided by Vite in your browser and start using the application.
 
 ---
 
@@ -332,26 +267,23 @@ The project provides hands-on experience with:
 
 * 📸 Medical report image upload and analysis
 * 📄 Downloadable health reports
-* 📊 Additional laboratory test categories
 * 💬 Conversational AI health assistant
+* 📊 Additional laboratory tests
 * 📱 Mobile application
 * 🌍 Multi-language support
 * ☁️ Cloud deployment
-* 📈 Health data visualizations
 
 ---
 
-# 👨‍💻 Developer
+# 👩‍💻 Developer
 
 **Pabasara Ranasinghe**
 
-Second Year Software Engineering Student — NIBM
+Second Year Software Engineering Undergraduate
 
 Interested in **AI, Frontend Development, Full-Stack Development, and Software Engineering**.
 
-### GitHub
-
-**PabasaraRanasinghe216**
+**GitHub:** `PabasaraRanasinghe216`
 
 ---
 
