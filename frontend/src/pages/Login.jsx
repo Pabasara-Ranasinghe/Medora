@@ -38,10 +38,22 @@ function Login() {
         }
       )
 
-      const data = await response.json()
+      const contentType = response.headers.get('content-type') || ''
+
+      let data
+
+      if (contentType.includes('application/json')) {
+        data = await response.json()
+      } else {
+        data = await response.text()
+      }
 
       if (!response.ok) {
-        throw new Error(data || 'Invalid email or password')
+        throw new Error(
+          typeof data === 'string'
+            ? data
+            : data.message || 'Invalid email or password'
+        )
       }
 
       // Store logged-in user information
@@ -51,7 +63,9 @@ function Login() {
       navigate('/test-results')
 
     } catch (error) {
-      setError(error.message)
+      setError(
+        error.message || 'Something went wrong. Please try again.'
+      )
     } finally {
       setLoading(false)
     }
