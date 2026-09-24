@@ -1,12 +1,12 @@
 package backend.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class GroqAIService implements AIService {
@@ -20,7 +20,7 @@ public class GroqAIService implements AIService {
             "https://api.groq.com/openai/v1/chat/completions";
 
     private static final String MODEL =
-            "llama-3.3-70b-versatile";
+        "openai/gpt-oss-120b";
 
     public GroqAIService() {
         this.restClient = RestClient.builder()
