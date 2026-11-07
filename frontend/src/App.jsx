@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import './App.css'
@@ -20,65 +21,29 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        <Route
-          path="/"
-          element={<Home />}
-        />
+        <Route path="/" element={<Home />} />
 
-        <Route
-          path="/login"
-          element={<Login />}
-        />
+        <Route path="/login" element={<Login />} />
 
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+        <Route path="/register" element={<Register />} />
 
-        <Route
-          path="/dashboard"
-          element={<Dashboard />}
-        />
+        <Route path="/dashboard" element={<Dashboard />} />
 
-        <Route
-          path="/health-report"
-          element={<HealthReport />}
-        />
+        <Route path="/health-report" element={<HealthReport />} />
 
-        <Route
-          path="/test-results"
-          element={<TestResults />}
-        />
+        <Route path="/test-results" element={<TestResults />} />
 
-        <Route
-          path="/test-results/cbc"
-          element={<CBCReport />}
-        />
+        <Route path="/test-results/cbc" element={<CBCReport />} />
 
-        <Route
-          path="/test-results/blood-glucose"
-          element={<BloodGlucoseReport />}
-        />
+        <Route path="/test-results/blood-glucose" element={<BloodGlucoseReport />} />
 
-        <Route
-          path="/test-results/lipid"
-          element={<LipidProfileReport />}
-        />
+        <Route path="/test-results/lipid" element={<LipidProfileReport />} />
 
-        <Route
-          path="/test-results/lft"
-          element={<LiverFunctionReport />}
-        />
+        <Route path="/test-results/lft" element={<LiverFunctionReport />} />
 
-        <Route
-          path="/test-results/kidney"
-          element={<KidneyFunctionReport />}
-        />
+        <Route path="/test-results/kidney" element={<KidneyFunctionReport />} />
 
-        <Route
-          path="/test-results/thyroid"
-          element={<ThyroidFunctionReport />}
-        />
+        <Route path="/test-results/thyroid" element={<ThyroidFunctionReport />} />
 
       </Routes>
     </BrowserRouter>
