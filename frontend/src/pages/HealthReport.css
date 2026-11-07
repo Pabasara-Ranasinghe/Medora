@@ -116,3 +116,334 @@
 .ai-explanation-card .medical-disclaimer {
   margin-top: 20px;
 }
+
+
+/* ============================= */
+/* PDF REVIEW SECTION */
+/* ============================= */
+
+.pdf-review-section {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid #e0ebf3;
+  text-align: left;
+}
+
+.pdf-review-heading h2 {
+  color: #102a43;
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.pdf-review-heading p {
+  color: #627d98;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.pdf-upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 30px 15px;
+  border: 2px dashed #b8d5f5;
+  border-radius: 14px;
+  background: #f7fbff;
+  text-align: center;
+}
+
+.pdf-upload-icon {
+  font-size: 36px;
+}
+
+.pdf-upload-area label {
+  color: #1479ff;
+  font-weight: 600;
+}
+
+.pdf-upload-area input {
+  width: 100%;
+  max-width: 260px;
+  font-size: 13px;
+}
+
+.pdf-upload-area small {
+  color: #829ab1;
+}
+
+.selected-pdf {
+  color: #334e68;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+
+
+.pdf-upload-button:hover {
+  background: #243f5b;
+}
+
+.pdf-upload-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.pdf-success {
+  margin-top: 15px;
+  padding: 13px;
+  border-radius: 10px;
+  background: #ecfdf3;
+  color: #166534;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.pdf-extracted-section {
+  margin-top: 25px;
+}
+
+.pdf-extracted-section h3 {
+  color: #102a43;
+  margin-bottom: 10px;
+}
+
+.pdf-extracted-section > p {
+  color: #627d98;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.pdf-extracted-text {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #d6e2eb;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.7;
+  resize: vertical;
+  outline: none;
+}
+
+.pdf-extracted-text:focus {
+  border-color: #1479ff;
+  box-shadow: 0 0 0 3px rgba(20, 121, 255, 0.1);
+}
+
+.pdf-review-notice {
+  margin-top: 15px;
+  padding: 15px;
+  background: #fff8e7;
+  border: 1px solid #f5dfaa;
+  border-radius: 10px;
+  color: #805b12;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.pdf-review-notice p {
+  margin-top: 5px;
+}
+
+
+
+
+/* ============================= */
+/* PDF REVIEW SECTION */
+/* ============================= */
+
+.pdf-review-section {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid #e0ebf3;
+  text-align: left;
+}
+
+.pdf-review-heading h2 {
+  color: #102a43;
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.pdf-review-heading p {
+  color: #627d98;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.pdf-upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 30px 15px;
+  border: 2px dashed #b8d5f5;
+  border-radius: 14px;
+  background: #f7fbff;
+  text-align: center;
+}
+
+.pdf-upload-icon {
+  font-size: 36px;
+}
+
+.pdf-upload-area label {
+  color: #1479ff;
+  font-weight: 600;
+}
+
+.pdf-upload-area input {
+  width: 100%;
+  max-width: 260px;
+  font-size: 13px;
+}
+
+.pdf-upload-area small {
+  color: #829ab1;
+}
+
+.selected-pdf {
+  color: #334e68;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.pdf-upload-button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #102a43;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.pdf-upload-button:hover {
+  background: #243f5b;
+}
+
+.pdf-upload-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.pdf-success {
+  margin-top: 15px;
+  padding: 13px;
+  border-radius: 10px;
+  background: #ecfdf3;
+  color: #166534;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.pdf-extracted-section {
+  margin-top: 25px;
+}
+
+.pdf-extracted-section h3 {
+  color: #102a43;
+  margin-bottom: 10px;
+}
+
+.pdf-extracted-section > p {
+  color: #627d98;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.pdf-extracted-text {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #d6e2eb;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.7;
+  resize: vertical;
+  outline: none;
+}
+
+.pdf-extracted-text:focus {
+  border-color: #1479ff;
+  box-shadow: 0 0 0 3px rgba(20, 121, 255, 0.1);
+}
+
+.pdf-review-notice {
+  margin-top: 15px;
+  padding: 15px;
+  background: #fff8e7;
+  border: 1px solid #f5dfaa;
+  border-radius: 10px;
+  color: #805b12;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.pdf-review-notice p {
+  margin-top: 5px;
+}
+
+
+/* PDF LABORATORY RESULT PREVIEW */
+
+.pdf-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.pdf-result-preview {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.pdf-result-preview h4 {
+  font-weight: 700;
+}
+
+.pdf-result-preview p {
+  line-height: 1.6;
+}
+
+.pdf-result-preview span {
+  line-height: 1.4;
+}
+
+
+
+
+/* PDF LABORATORY RESULT CARDS */
+
+.pdf-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.pdf-result-preview {
+  transition: background-color 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.pdf-result-preview h4 {
+  font-weight: 700;
+}
+
+.pdf-result-preview p {
+  line-height: 1.6;
+}
+
+.pdf-result-preview span {
+  line-height: 1.4;
+}
