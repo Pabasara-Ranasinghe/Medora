@@ -27,6 +27,26 @@ function HealthReport() {
   const [aiLoading, setAiLoading] = useState(false)
   const [aiError, setAiError] = useState('')
 
+  // Verification progress
+  const verifiedCount = parsedResults.filter(
+    (result) => result.verified
+  ).length
+
+  const allResultsVerified =
+    parsedResults.length > 0 &&
+    verifiedCount === parsedResults.length
+
+  // Verify or unverify an individual result
+  const handleVerifyResult = (resultId, checked) => {
+    setParsedResults((previousResults) =>
+      previousResults.map((result) =>
+        result.id === resultId
+          ? { ...result, verified: checked }
+          : result
+      )
+    )
+  }
+
   // Create Health Report
   const handleCreateReport = async (e) => {
     e.preventDefault()
@@ -235,7 +255,7 @@ their actual results.
 
       setPdfSuccess(
         results.length > 0
-          ? `PDF extracted successfully. ${results.length} possible test results found. Please review them carefully.`
+          ? `PDF extracted successfully. ${results.length} possible test results found. Please review and verify them carefully.`
           : 'PDF text extracted, but no supported test results were identified. Please check the original report.'
       )
 
@@ -254,6 +274,33 @@ their actual results.
   // Navigate to Test Results
   const handleGoToTestResults = () => {
     navigate('/test-results')
+  }
+
+  // Status styles
+  const statusStyles = {
+    WITHIN_RANGE: {
+      background: '#EFF6FF',
+      border: '#3B82F6',
+      color: '#2563EB',
+    },
+
+    ABOVE_RANGE: {
+      background: '#FEF2F2',
+      border: '#EF4444',
+      color: '#DC2626',
+    },
+
+    BELOW_RANGE: {
+      background: '#FEFCE8',
+      border: '#EAB308',
+      color: '#A16207',
+    },
+
+    NEEDS_REVIEW: {
+      background: '#F3F4F6',
+      border: '#9CA3AF',
+      color: '#4B5563',
+    },
   }
 
   return (
@@ -466,42 +513,98 @@ their actual results.
 
               <p>
                 These are preliminary extracted values.
-                Please verify each value against the original PDF.
+                Compare each result with the original PDF
+                before confirming it.
               </p>
+
+              {/* VERIFICATION PROGRESS */}
+
+              <div
+                style={{
+                  background: '#F3F4F6',
+                  padding: '16px',
+                  borderRadius: '10px',
+                  margin: '18px 0',
+                }}
+              >
+
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    gap: '12px',
+                    flexWrap: 'wrap',
+                    marginBottom: '10px',
+                  }}
+                >
+
+                  <strong style={{ color: '#374151' }}>
+                    Verification Progress
+                  </strong>
+
+                  <span
+                    style={{
+                      fontWeight: '600',
+                      color: allResultsVerified
+                        ? '#15803D'
+                        : '#4B5563',
+                    }}
+                  >
+                    {verifiedCount} of {parsedResults.length} verified
+                  </span>
+
+                </div>
+
+                <div
+                  style={{
+                    height: '8px',
+                    background: '#D1D5DB',
+                    borderRadius: '10px',
+                    overflow: 'hidden',
+                  }}
+                >
+
+                  <div
+                    style={{
+                      height: '100%',
+                      width: `${(verifiedCount / parsedResults.length) * 100}%`,
+                      background: '#16A34A',
+                      borderRadius: '10px',
+                      transition: 'width 0.3s ease',
+                    }}
+                  />
+
+                </div>
+
+                <p
+                  style={{
+                    fontSize: '13px',
+                    color: '#4B5563',
+                    margin: '10px 0 0',
+                  }}
+                >
+                  {allResultsVerified
+                    ? 'All detected results have been verified.'
+                    : 'Please verify each result against the original laboratory report.'}
+                </p>
+
+              </div>
 
               <div className="pdf-results-list">
 
                 {parsedResults.map((result) => {
 
-                  const statusStyles = {
-                    WITHIN_RANGE: {
-                      background: '#EFF6FF',
-                      border: '#3B82F6',
-                      color: '#2563EB',
-                    },
-
-                    ABOVE_RANGE: {
-                      background: '#FEF2F2',
-                      border: '#EF4444',
-                      color: '#DC2626',
-                    },
-
-                    BELOW_RANGE: {
-                      background: '#FEFCE8',
-                      border: '#EAB308',
-                      color: '#A16207',
-                    },
-
-                    NEEDS_REVIEW: {
-                      background: '#F3F4F6',
-                      border: '#9CA3AF',
-                      color: '#4B5563',
-                    },
-                  }
-
                   const style =
                     statusStyles[result.statusCode] ||
                     statusStyles.NEEDS_REVIEW
+
+                  const canVerify =
+                    result.value !== null &&
+                    result.value !== undefined &&
+                    String(result.value).trim() !== '' &&
+                    result.referenceRange &&
+                    result.referenceRange !== 'Not detected'
 
                   return (
 
@@ -557,22 +660,122 @@ their actual results.
                         {result.status}
                       </span>
 
-                      <p
+                      {/* INDIVIDUAL VERIFICATION */}
+
+                      <div
                         style={{
-                          fontSize: '12px',
-                          color: '#6B7280',
-                          marginTop: '12px',
+                          marginTop: '16px',
+                          paddingTop: '14px',
+                          borderTop: '1px solid #D1D5DB',
                         }}
                       >
-                        {result.verified
-                          ? 'Verified by you'
-                          : 'Please verify against the original report'}
-                      </p>
+
+                        <label
+                          style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '10px',
+                            cursor: canVerify ? 'pointer' : 'not-allowed',
+                            color: '#374151',
+                            fontSize: '14px',
+                            lineHeight: '1.5',
+                          }}
+                        >
+
+                          <input
+                            type="checkbox"
+                            checked={Boolean(result.verified)}
+                            disabled={!canVerify}
+                            onChange={(e) =>
+                              handleVerifyResult(
+                                result.id,
+                                e.target.checked
+                              )
+                            }
+                            style={{
+                              marginTop: '3px',
+                              width: '16px',
+                              height: '16px',
+                              flexShrink: 0,
+                              accentColor: '#16A34A',
+                            }}
+                          />
+
+                          <span>
+                            I have checked this result against
+                            the original laboratory PDF and
+                            confirm that the extracted information
+                            is correct.
+                          </span>
+
+                        </label>
+
+                        <p
+                          style={{
+                            fontSize: '12px',
+                            color: result.verified
+                              ? '#15803D'
+                              : '#6B7280',
+                            marginTop: '10px',
+                            marginBottom: '0',
+                            fontWeight: '500',
+                          }}
+                        >
+                          {result.verified
+                            ? '✓ Verified by you'
+                            : canVerify
+                              ? 'Please verify against the original report'
+                              : 'Cannot verify: value or reference range is missing.'}
+                        </p>
+
+                      </div>
 
                     </div>
 
                   )
                 })}
+
+              </div>
+
+              {/* VERIFICATION NOTICE */}
+
+              <div
+                style={{
+                  background: allResultsVerified
+                    ? '#F0FDF4'
+                    : '#FFFBEB',
+                  border: `1px solid ${
+                    allResultsVerified ? '#86EFAC' : '#FDE68A'
+                  }`,
+                  borderRadius: '10px',
+                  padding: '15px',
+                  marginTop: '16px',
+                }}
+              >
+
+                <strong
+                  style={{
+                    color: allResultsVerified
+                      ? '#166534'
+                      : '#92400E',
+                  }}
+                >
+                  {allResultsVerified
+                    ? 'Verification completed'
+                    : 'Verification required'}
+                </strong>
+
+                <p
+                  style={{
+                    color: '#4B5563',
+                    fontSize: '13px',
+                    marginBottom: '0',
+                  }}
+                >
+                  {allResultsVerified
+                    ? 'All detected results have been confirmed by you. No medical analysis has been performed yet.'
+                    : 'Unverified results must not be used for medical analysis. Please compare each value and reference range with the original PDF.'}
+                </p>
 
               </div>
 
@@ -598,6 +801,8 @@ their actual results.
 
                   setExtractedText(updatedText)
 
+                  // Re-parsing resets verification.
+                  // Changed results must be reviewed again.
                   setParsedResults(
                     parseLabResults(updatedText)
                   )
