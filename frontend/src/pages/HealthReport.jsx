@@ -1,8 +1,145 @@
-
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { parseLabResults } from '../utils/parseLabResults'
+import {
+  parseLabResults,
+  detectLabReportCategory,
+} from '../utils/parseLabResults'
 import './healthreport.css'
+
+const CBC_PARAMETER_IDS = [
+  'rbc',
+  'hemoglobin',
+  'hematocrit',
+  'mcv',
+  'mch',
+  'mchc',
+  'rdw',
+  'wbc',
+  'platelets',
+]
+
+const VERIFIED_CBC_STORAGE_KEY = 'medoraVerifiedCBCReports'
+
+// Convert a numeric laboratory reference range into low/high values.
+function parseNumericReferenceRange(referenceRange) {
+  if (!referenceRange) return null
+
+  const normalizedRange = String(referenceRange)
+    .replace(/,/g, '')
+    .trim()
+
+  const match = normalizedRange.match(
+    /^(\d+(?:\.\d+)?)\s*[–—-]\s*(\d+(?:\.\d+)?)$/
+  )
+
+  if (!match) return null
+
+  const low = Number(match[1])
+  const high = Number(match[2])
+
+  if (
+    !Number.isFinite(low) ||
+    !Number.isFinite(high) ||
+    low > high
+  ) {
+    return null
+  }
+
+  return { low, high }
+}
+
+// Remove a previously saved CBC report from this browser session.
+function removeVerifiedCBCReport(reportId) {
+  if (!reportId) return
+
+  try {
+    const savedReports = JSON.parse(
+      sessionStorage.getItem(VERIFIED_CBC_STORAGE_KEY) || '[]'
+    )
+
+    const updatedReports = savedReports.filter(
+      (report) => report.id !== reportId
+    )
+
+    sessionStorage.setItem(
+      VERIFIED_CBC_STORAGE_KEY,
+      JSON.stringify(updatedReports)
+    )
+  } catch (error) {
+    console.error('Unable to update CBC reports:', error)
+  }
+}
+
+// Automatically make a complete CBC PDF available to CBCReport.jsx.
+// No individual checkbox confirmation is required.
+function saveCompleteCBCReport(results, reportId, fileName) {
+  if (!reportId) return false
+
+  const cbcResults = results.filter(
+    (result) => result.category === 'cbc'
+  )
+
+  const resultMap = new Map(
+    cbcResults.map((result) => [result.id, result])
+  )
+
+  const hasAllCBCParameters =
+    cbcResults.length === CBC_PARAMETER_IDS.length &&
+    CBC_PARAMETER_IDS.every((id) => resultMap.has(id))
+
+  const hasCompleteValuesAndRanges =
+    hasAllCBCParameters &&
+    CBC_PARAMETER_IDS.every((id) => {
+      const result = resultMap.get(id)
+
+      return (
+        String(result.value ?? '').trim() !== '' &&
+        Number.isFinite(Number(result.value)) &&
+        parseNumericReferenceRange(result.referenceRange) !== null
+      )
+    })
+
+  if (!hasCompleteValuesAndRanges) {
+    removeVerifiedCBCReport(reportId)
+    return false
+  }
+
+  const savedValues = {}
+  const labRanges = {}
+
+  for (const id of CBC_PARAMETER_IDS) {
+    const result = resultMap.get(id)
+    savedValues[id] = Number(result.value)
+    labRanges[id] = parseNumericReferenceRange(result.referenceRange)
+  }
+
+  const savedReport = {
+    id: reportId,
+    fileName: fileName || 'Laboratory Report',
+    savedAt: new Date().toISOString(),
+    results: savedValues,
+    labRanges,
+  }
+
+  try {
+    const savedReports = JSON.parse(
+      sessionStorage.getItem(VERIFIED_CBC_STORAGE_KEY) || '[]'
+    )
+
+    sessionStorage.setItem(
+      VERIFIED_CBC_STORAGE_KEY,
+      JSON.stringify([
+        ...savedReports.filter((report) => report.id !== reportId),
+        savedReport,
+      ])
+    )
+
+    return true
+  } catch (error) {
+    console.error('Unable to save extracted CBC report:', error)
+    return false
+  }
+}
 
 function HealthReport() {
   const navigate = useNavigate()
@@ -14,6 +151,12 @@ function HealthReport() {
   const [pdfSuccess, setPdfSuccess] = useState('')
   const [extractedText, setExtractedText] = useState('')
   const [parsedResults, setParsedResults] = useState([])
+  const [categoryDetection, setCategoryDetection] = useState({
+    category: null,
+    status: 'UNKNOWN',
+    scores: {},
+  })
+  const [currentPdfReportId, setCurrentPdfReportId] = useState(null)
 
   // Health Report states
   const [reportType, setReportType] = useState('')
@@ -26,26 +169,6 @@ function HealthReport() {
   const [aiExplanation, setAiExplanation] = useState('')
   const [aiLoading, setAiLoading] = useState(false)
   const [aiError, setAiError] = useState('')
-
-  // Verification progress
-  const verifiedCount = parsedResults.filter(
-    (result) => result.verified
-  ).length
-
-  const allResultsVerified =
-    parsedResults.length > 0 &&
-    verifiedCount === parsedResults.length
-
-  // Verify or unverify an individual result
-  const handleVerifyResult = (resultId, checked) => {
-    setParsedResults((previousResults) =>
-      previousResults.map((result) =>
-        result.id === resultId
-          ? { ...result, verified: checked }
-          : result
-      )
-    )
-  }
 
   // Create Health Report
   const handleCreateReport = async (e) => {
@@ -106,9 +229,11 @@ function HealthReport() {
       )
 
       setReportId(data?.reportId || '')
-
     } catch (error) {
-      console.error('Health report creation error:', error)
+      console.error(
+        'Health report creation error:',
+        error
+      )
 
       setError(
         error.message ||
@@ -185,7 +310,6 @@ their actual results.
         data?.explanation ||
         'No explanation was returned.'
       )
-
     } catch (error) {
       console.error('AI explanation error:', error)
 
@@ -206,6 +330,8 @@ their actual results.
     setPdfSuccess('')
     setExtractedText('')
     setParsedResults([])
+    setCategoryDetection({ category: null, status: 'UNKNOWN', scores: {} })
+    setCurrentPdfReportId(null)
 
     if (!pdfFile) {
       setPdfError('Please select a PDF file.')
@@ -247,18 +373,36 @@ their actual results.
 
       const extracted = data?.extractedText || ''
 
-      setExtractedText(extracted)
-
       const results = parseLabResults(extracted)
+      const detected = detectLabReportCategory(extracted)
 
+      const newReportId =
+        `pdf-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`
+
+      setExtractedText(extracted)
+      setCurrentPdfReportId(newReportId)
       setParsedResults(results)
+      setCategoryDetection(detected)
+
+      // A complete CBC can be made available to the CBC page
+      // automatically. Other categories remain in PDF review.
+      const cbcSaved = saveCompleteCBCReport(
+        results,
+        newReportId,
+        pdfFile.name
+      )
+
+      const categoryName = detected.category
+        ? detected.category.toUpperCase()
+        : detected.status === 'AMBIGUOUS'
+          ? 'Ambiguous / combined report'
+          : 'Unknown report category'
 
       setPdfSuccess(
         results.length > 0
-          ? `PDF extracted successfully. ${results.length} possible test results found. Please review and verify them carefully.`
+          ? `PDF extracted successfully. ${results.length} test results found. Detected category: ${categoryName}.${cbcSaved ? ' Complete CBC results are available on the CBC page.' : ''}`
           : 'PDF text extracted, but no supported test results were identified. Please check the original report.'
       )
-
     } catch (error) {
       console.error('PDF upload error:', error)
 
@@ -301,6 +445,15 @@ their actual results.
       border: '#9CA3AF',
       color: '#4B5563',
     },
+  }
+
+  const categoryLabels = {
+    cbc: 'Complete Blood Count (CBC)',
+    glucose: 'Blood Glucose',
+    lipid: 'Lipid Profile',
+    lft: 'Liver Function Test (LFT)',
+    rft: 'Renal Function Test (RFT)',
+    tft: 'Thyroid Function Test (TFT)',
   }
 
   return (
@@ -455,11 +608,20 @@ their actual results.
                 type="file"
                 accept=".pdf,application/pdf"
                 onChange={(e) => {
+                  // A newly selected file starts a fresh PDF review.
+                  removeVerifiedCBCReport(currentPdfReportId)
+
                   setPdfFile(e.target.files?.[0] || null)
                   setPdfError('')
                   setPdfSuccess('')
                   setExtractedText('')
                   setParsedResults([])
+                  setCategoryDetection({
+                    category: null,
+                    status: 'UNKNOWN',
+                    scores: {},
+                  })
+                  setCurrentPdfReportId(null)
                 }}
               />
 
@@ -512,83 +674,31 @@ their actual results.
               <h3>Detected Laboratory Results</h3>
 
               <p>
-                These are preliminary extracted values.
-                Compare each result with the original PDF
-                before confirming it.
+                Medora has extracted the available test names, values,
+                units and reference ranges from the PDF. The results below
+                are shown for review; no medical analysis has been performed.
               </p>
-
-              {/* VERIFICATION PROGRESS */}
 
               <div
                 style={{
-                  background: '#F3F4F6',
-                  padding: '16px',
+                  background: '#EFF6FF',
+                  border: '1px solid #BFDBFE',
                   borderRadius: '10px',
+                  padding: '14px 16px',
                   margin: '18px 0',
                 }}
               >
-
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    gap: '12px',
-                    flexWrap: 'wrap',
-                    marginBottom: '10px',
-                  }}
-                >
-
-                  <strong style={{ color: '#374151' }}>
-                    Verification Progress
-                  </strong>
-
-                  <span
-                    style={{
-                      fontWeight: '600',
-                      color: allResultsVerified
-                        ? '#15803D'
-                        : '#4B5563',
-                    }}
-                  >
-                    {verifiedCount} of {parsedResults.length} verified
-                  </span>
-
-                </div>
-
-                <div
-                  style={{
-                    height: '8px',
-                    background: '#D1D5DB',
-                    borderRadius: '10px',
-                    overflow: 'hidden',
-                  }}
-                >
-
-                  <div
-                    style={{
-                      height: '100%',
-                      width: `${(verifiedCount / parsedResults.length) * 100}%`,
-                      background: '#16A34A',
-                      borderRadius: '10px',
-                      transition: 'width 0.3s ease',
-                    }}
-                  />
-
-                </div>
-
-                <p
-                  style={{
-                    fontSize: '13px',
-                    color: '#4B5563',
-                    margin: '10px 0 0',
-                  }}
-                >
-                  {allResultsVerified
-                    ? 'All detected results have been verified.'
-                    : 'Please verify each result against the original laboratory report.'}
+                <strong style={{ color: '#1E40AF' }}>
+                  Detected report category
+                </strong>
+                <p style={{ color: '#1F2937', margin: '6px 0 0' }}>
+                  {categoryDetection.category
+                    ? categoryLabels[categoryDetection.category] ||
+                      categoryDetection.category.toUpperCase()
+                    : categoryDetection.status === 'AMBIGUOUS'
+                      ? 'Ambiguous or combined report'
+                      : 'Could not confidently identify the report category'}
                 </p>
-
               </div>
 
               <div className="pdf-results-list">
@@ -598,13 +708,6 @@ their actual results.
                   const style =
                     statusStyles[result.statusCode] ||
                     statusStyles.NEEDS_REVIEW
-
-                  const canVerify =
-                    result.value !== null &&
-                    result.value !== undefined &&
-                    String(result.value).trim() !== '' &&
-                    result.referenceRange &&
-                    result.referenceRange !== 'Not detected'
 
                   return (
 
@@ -660,75 +763,6 @@ their actual results.
                         {result.status}
                       </span>
 
-                      {/* INDIVIDUAL VERIFICATION */}
-
-                      <div
-                        style={{
-                          marginTop: '16px',
-                          paddingTop: '14px',
-                          borderTop: '1px solid #D1D5DB',
-                        }}
-                      >
-
-                        <label
-                          style={{
-                            display: 'flex',
-                            alignItems: 'flex-start',
-                            gap: '10px',
-                            cursor: canVerify ? 'pointer' : 'not-allowed',
-                            color: '#374151',
-                            fontSize: '14px',
-                            lineHeight: '1.5',
-                          }}
-                        >
-
-                          <input
-                            type="checkbox"
-                            checked={Boolean(result.verified)}
-                            disabled={!canVerify}
-                            onChange={(e) =>
-                              handleVerifyResult(
-                                result.id,
-                                e.target.checked
-                              )
-                            }
-                            style={{
-                              marginTop: '3px',
-                              width: '16px',
-                              height: '16px',
-                              flexShrink: 0,
-                              accentColor: '#16A34A',
-                            }}
-                          />
-
-                          <span>
-                            I have checked this result against
-                            the original laboratory PDF and
-                            confirm that the extracted information
-                            is correct.
-                          </span>
-
-                        </label>
-
-                        <p
-                          style={{
-                            fontSize: '12px',
-                            color: result.verified
-                              ? '#15803D'
-                              : '#6B7280',
-                            marginTop: '10px',
-                            marginBottom: '0',
-                            fontWeight: '500',
-                          }}
-                        >
-                          {result.verified
-                            ? '✓ Verified by you'
-                            : canVerify
-                              ? 'Please verify against the original report'
-                              : 'Cannot verify: value or reference range is missing.'}
-                        </p>
-
-                      </div>
 
                     </div>
 
@@ -737,47 +771,6 @@ their actual results.
 
               </div>
 
-              {/* VERIFICATION NOTICE */}
-
-              <div
-                style={{
-                  background: allResultsVerified
-                    ? '#F0FDF4'
-                    : '#FFFBEB',
-                  border: `1px solid ${
-                    allResultsVerified ? '#86EFAC' : '#FDE68A'
-                  }`,
-                  borderRadius: '10px',
-                  padding: '15px',
-                  marginTop: '16px',
-                }}
-              >
-
-                <strong
-                  style={{
-                    color: allResultsVerified
-                      ? '#166534'
-                      : '#92400E',
-                  }}
-                >
-                  {allResultsVerified
-                    ? 'Verification completed'
-                    : 'Verification required'}
-                </strong>
-
-                <p
-                  style={{
-                    color: '#4B5563',
-                    fontSize: '13px',
-                    marginBottom: '0',
-                  }}
-                >
-                  {allResultsVerified
-                    ? 'All detected results have been confirmed by you. No medical analysis has been performed yet.'
-                    : 'Unverified results must not be used for medical analysis. Please compare each value and reference range with the original PDF.'}
-                </p>
-
-              </div>
 
             </div>
 
@@ -799,13 +792,25 @@ their actual results.
                 onChange={(e) => {
                   const updatedText = e.target.value
 
-                  setExtractedText(updatedText)
+                  // Re-parse the edited text and refresh the detected category.
+                  const updatedResults = parseLabResults(updatedText)
+                  const updatedCategory = detectLabReportCategory(updatedText)
 
-                  // Re-parsing resets verification.
-                  // Changed results must be reviewed again.
-                  setParsedResults(
-                    parseLabResults(updatedText)
-                  )
+                  setExtractedText(updatedText)
+                  setParsedResults(updatedResults)
+                  setCategoryDetection(updatedCategory)
+
+                  if (currentPdfReportId) {
+                    const cbcSaved = saveCompleteCBCReport(
+                      updatedResults,
+                      currentPdfReportId,
+                      pdfFile?.name
+                    )
+
+                    if (!cbcSaved) {
+                      removeVerifiedCBCReport(currentPdfReportId)
+                    }
+                  }
                 }}
                 rows={12}
                 placeholder="Extracted PDF text will appear here..."
@@ -817,8 +822,8 @@ their actual results.
 
                 <p>
                   Automated PDF extraction may contain errors.
-                  Verify all test names, values, units and
-                  reference ranges against the original report.
+                  Review the extracted test names, values, units and
+                  reference ranges against the original laboratory PDF.
                   No medical analysis has been performed yet.
                 </p>
 
