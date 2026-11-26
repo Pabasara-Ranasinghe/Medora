@@ -3,6 +3,19 @@ import { useNavigate } from 'react-router-dom'
 import './BloodGlucoseReport.css'
 import LabPdfReview from '../components/LabPdfReview'
 
+const GLUCOSE_PDF_PARAMETERS = [
+  { id: 'fasting-blood-glucose', name: 'Fasting Blood Glucose', unit: 'mg/dL' },
+  { id: 'random-blood-glucose', name: 'Random Blood Glucose', unit: 'mg/dL' },
+  { id: 'postprandial-blood-glucose', name: 'Post-meal Blood Glucose', unit: 'mg/dL' },
+  { id: 'hba1c', name: 'HbA1c', unit: '%' },
+]
+
+const GLUCOSE_FIELD_MAP = {
+  'fasting-blood-glucose': 'glucose',
+  'random-blood-glucose': 'glucose',
+  'postprandial-blood-glucose': 'glucose',
+}
+
 function BloodGlucoseReport() {
   const navigate = useNavigate()
 
@@ -11,10 +24,7 @@ function BloodGlucoseReport() {
 
   const [glucose, setGlucose] = useState('')
 
-  const [labRange, setLabRange] = useState({
-    low: '',
-    high: '',
-  })
+  const [labRanges, setLabRanges] = useState({})
 
   const [analysis, setAnalysis] = useState(null)
 
@@ -25,6 +35,35 @@ function BloodGlucoseReport() {
   const [aiExplanation, setAiExplanation] = useState('')
   const [aiLoading, setAiLoading] = useState(false)
   const [aiError, setAiError] = useState('')
+
+  const handlePdfResults = (items, numericRanges = {}) => {
+    if (!items.length) {
+      setLabRanges({})
+      setRangeType('standard')
+      setAnalysis(null)
+      setAiExplanation('')
+      setError('')
+      return
+    }
+
+    const selectedId = {
+      fasting: 'fasting-blood-glucose',
+      random: 'random-blood-glucose',
+      'post-meal': 'postprandial-blood-glucose',
+    }[testType]
+    const selected = items.find((item) => item.id === selectedId)
+    const selectedRange = selected ? numericRanges[selected.id] : null
+    const extractedRanges = selectedRange ? { glucose: selectedRange } : {}
+
+    if (selected?.value !== null && selected?.value !== undefined) {
+      setGlucose(String(selected.value))
+    }
+    setLabRanges(extractedRanges)
+    setRangeType(Object.keys(extractedRanges).length ? 'laboratory' : 'standard')
+    setAnalysis(null)
+    setAiExplanation('')
+    setError('')
+  }
 
   // --------------------------------------------------
   // TEST TYPE NAME
@@ -58,15 +97,6 @@ function BloodGlucoseReport() {
       return
     }
 
-    if (
-      rangeType === 'laboratory' &&
-      (labRange.low === '' || labRange.high === '')
-    ) {
-      setError(
-        'Please enter both laboratory reference range values.'
-      )
-      return
-    }
 
     setLoading(true)
     setError('')
@@ -93,15 +123,7 @@ function BloodGlucoseReport() {
         rangeType: rangeType,
         glucose: Number(glucose),
 
-        labRanges:
-          rangeType === 'laboratory'
-            ? {
-                glucose: {
-                  low: Number(labRange.low),
-                  high: Number(labRange.high),
-                },
-              }
-            : {},
+        labRanges: rangeType === 'laboratory' ? labRanges : {},
       }
 
       console.log(
@@ -196,7 +218,7 @@ ${rangeType}
 Laboratory Reference Range:
 ${
   rangeType === 'laboratory'
-    ? `${labRange.low} - ${labRange.high} mg/dL`
+    ? `${labRanges.glucose.low} - ${labRanges.glucose.high} mg/dL`
     : 'Medora standard reference range'
 }
 
@@ -387,11 +409,12 @@ Requirements:
 
       {/* FORM */}
 
-      <LabPdfReview expectedCategory="glucose" onResults={(items) => {
-        const selected = items.find((item) => ({ fasting: 'fasting-blood-glucose', random: 'random-blood-glucose', 'post-meal': 'postprandial-blood-glucose' }[testType] === item.id)) || items.find((item) => item.id.includes('glucose')) || items.find((item) => item.id === 'hba1c')
-        if (selected) setGlucose(selected.value)
-        setError('')
-      }} />
+      <LabPdfReview
+        expectedCategory="glucose"
+        parameters={GLUCOSE_PDF_PARAMETERS}
+        fieldMap={GLUCOSE_FIELD_MAP}
+        onResults={handlePdfResults}
+      />
 
       <form onSubmit={handleSubmit}>
 
@@ -524,12 +547,7 @@ Requirements:
           </div>
 
         </div>
-
-        {/* LABORATORY RANGE */}
-
-        
-
-        {/* ERROR */}
+{/* ERROR */}
 
         {error && (
           <div className="form-error">
