@@ -94,43 +94,11 @@
    RANGE OPTIONS
 -------------------------------------------------- */
 
-.range-option {
-  display: flex;
-  gap: 15px;
-  align-items: flex-start;
-  padding: 20px;
-  border: 1px solid #e0ebf3;
-  border-radius: 14px;
-  margin-top: 15px;
-  cursor: pointer;
-  transition: 0.2s;
-}
 
-.range-option:hover {
-  border-color: #1479ff;
-  background: #f7fbff;
-}
 
-.range-option input {
-  margin-top: 4px;
-  accent-color: #1479ff;
-}
 
-.range-option div {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
 
-.range-option strong {
-  font-size: 16px;
-}
 
-.range-option span {
-  color: #627d98;
-  font-size: 14px;
-  line-height: 1.5;
-}
 
 /* --------------------------------------------------
    RESULTS
@@ -162,8 +130,7 @@
   font-size: 14px;
 }
 
-.result-input label,
-.lab-range label {
+.result-input label {
   display: block;
   font-size: 14px;
   font-weight: 600;
@@ -197,9 +164,6 @@
   white-space: nowrap;
 }
 
-.lab-range {
-  grid-column: 1 / -1;
-}
 
 .range-inputs {
   display: flex;
@@ -461,9 +425,6 @@
     grid-template-columns: 1fr;
   }
 
-  .lab-range {
-    grid-column: auto;
-  }
 
   .analysis-card > div {
     flex-direction: column;
