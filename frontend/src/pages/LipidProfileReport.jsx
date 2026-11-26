@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './LipidProfileReport.css'
+import LabPdfReview from '../components/LabPdfReview'
 
 function LipidProfileReport() {
   const navigate = useNavigate()
@@ -26,6 +27,12 @@ function LipidProfileReport() {
   const [aiExplanation, setAiExplanation] = useState('')
   const [aiLoading, setAiLoading] = useState(false)
   const [aiError, setAiError] = useState('')
+
+  const handlePdfResults = (items) => {
+    const fieldMap = { 'total-cholesterol': 'totalCholesterol', 'ldl-cholesterol': 'ldl', 'hdl-cholesterol': 'hdl', triglycerides: 'triglycerides', 'vldl-cholesterol': 'vldl' }
+    setResults((current) => ({ ...current, ...Object.fromEntries(items.filter((item) => fieldMap[item.id]).map((item) => [fieldMap[item.id], item.value])) }))
+    setError('')
+  }
 
   const parameters = [
     {
@@ -406,81 +413,10 @@ Requirements:
           FORM
       -------------------------------------------------- */}
 
+      <LabPdfReview expectedCategory="lipid" onResults={handlePdfResults} />
       <form onSubmit={handleSubmit}>
 
-        {/* Reference ranges */}
-
-        <div className="range-section">
-
-          <h2>
-            Reference ranges
-          </h2>
-
-          <p>
-            Choose how Medora should interpret your
-            laboratory results.
-          </p>
-
-          {/* Standard ranges */}
-
-          <label className="range-option">
-
-            <input
-              type="radio"
-              name="rangeType"
-              value="standard"
-              checked={rangeType === 'standard'}
-              onChange={() => {
-                setRangeType('standard')
-                setLabRanges({})
-              }}
-            />
-
-            <div>
-
-              <strong>
-                Use Medora's standard ranges
-              </strong>
-
-              <span>
-                Medora will use its predefined
-                reference ranges for this analysis.
-              </span>
-
-            </div>
-
-          </label>
-
-          {/* Laboratory ranges */}
-
-          <label className="range-option">
-
-            <input
-              type="radio"
-              name="rangeType"
-              value="laboratory"
-              checked={rangeType === 'laboratory'}
-              onChange={() =>
-                setRangeType('laboratory')
-              }
-            />
-
-            <div>
-
-              <strong>
-                Use ranges from my laboratory report
-              </strong>
-
-              <span>
-                Enter the reference ranges shown
-                on your laboratory report.
-              </span>
-
-            </div>
-
-          </label>
-
-        </div>
+        
 
         {/* --------------------------------------------------
             RESULTS
@@ -551,63 +487,7 @@ Requirements:
 
               {/* Laboratory reference range */}
 
-              {rangeType === 'laboratory' && (
-
-                <div className="lab-range">
-
-                  <label>
-                    My laboratory reference range
-                  </label>
-
-                  <div className="range-inputs">
-
-                    <input
-                      type="number"
-                      step="any"
-                      placeholder="Low"
-                      value={
-                        labRanges[
-                          parameter.id
-                        ]?.low || ''
-                      }
-                      onChange={(e) =>
-                        handleRangeChange(
-                          parameter.id,
-                          'low',
-                          e.target.value
-                        )
-                      }
-                      required
-                    />
-
-                    <span>
-                      to
-                    </span>
-
-                    <input
-                      type="number"
-                      step="any"
-                      placeholder="High"
-                      value={
-                        labRanges[
-                          parameter.id
-                        ]?.high || ''
-                      }
-                      onChange={(e) =>
-                        handleRangeChange(
-                          parameter.id,
-                          'high',
-                          e.target.value
-                        )
-                      }
-                      required
-                    />
-
-                  </div>
-
-                </div>
-
-              )}
+              
 
             </div>
 
