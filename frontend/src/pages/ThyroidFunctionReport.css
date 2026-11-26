@@ -97,47 +97,12 @@
    RANGE OPTIONS
 ========================= */
 
-.range-option {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 18px;
-  border: 1px solid #e0ebf3;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
 
-.range-option:last-child {
-  margin-bottom: 0;
-}
 
-.range-option:hover {
-  border-color: #1479ff;
-  background: #f7fbff;
-}
 
-.range-option input {
-  margin-top: 4px;
-  accent-color: #1479ff;
-}
 
-.range-option div {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
 
-.range-option strong {
-  font-size: 15px;
-}
 
-.range-option span {
-  color: #627d98;
-  font-size: 14px;
-  line-height: 1.5;
-}
 
 /* =========================
    RESULTS HEADING
@@ -191,8 +156,7 @@
    INPUTS
 ========================= */
 
-.result-input label,
-.lab-range label {
+.result-input label {
   display: block;
   font-size: 14px;
   font-weight: 600;
@@ -244,10 +208,6 @@
    LABORATORY RANGE
 ========================= */
 
-.lab-range {
-  grid-column: 1 / -1;
-  margin-top: 2px;
-}
 
 .range-inputs {
   display: flex;
@@ -707,9 +667,6 @@
     grid-template-columns: 1fr;
   }
 
-  .lab-range {
-    grid-column: auto;
-  }
 
   .range-inputs {
     flex-wrap: wrap;
