@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './BloodGlucoseReport.css'
+import LabPdfReview from '../components/LabPdfReview'
 
 function BloodGlucoseReport() {
   const navigate = useNavigate()
@@ -386,6 +387,12 @@ Requirements:
 
       {/* FORM */}
 
+      <LabPdfReview expectedCategory="glucose" onResults={(items) => {
+        const selected = items.find((item) => ({ fasting: 'fasting-blood-glucose', random: 'random-blood-glucose', 'post-meal': 'postprandial-blood-glucose' }[testType] === item.id)) || items.find((item) => item.id.includes('glucose')) || items.find((item) => item.id === 'hba1c')
+        if (selected) setGlucose(selected.value)
+        setError('')
+      }} />
+
       <form onSubmit={handleSubmit}>
 
         {/* TEST TYPE */}
@@ -475,75 +482,7 @@ Requirements:
 
         </div>
 
-        {/* REFERENCE RANGE */}
-
-        <div className="range-section">
-
-          <h2>
-            Reference ranges
-          </h2>
-
-          <p>
-            Choose how Medora should interpret
-            your laboratory result.
-          </p>
-
-          <label className="range-option">
-
-            <input
-              type="radio"
-              name="rangeType"
-              value="standard"
-              checked={rangeType === 'standard'}
-              onChange={() => {
-                setRangeType('standard')
-
-                setLabRange({
-                  low: '',
-                  high: '',
-                })
-              }}
-            />
-
-            <div>
-              <strong>
-                Use Medora's standard range
-              </strong>
-
-              <span>
-                Medora will use its predefined
-                reference range for this analysis.
-              </span>
-            </div>
-
-          </label>
-
-          <label className="range-option">
-
-            <input
-              type="radio"
-              name="rangeType"
-              value="laboratory"
-              checked={rangeType === 'laboratory'}
-              onChange={() =>
-                setRangeType('laboratory')
-              }
-            />
-
-            <div>
-              <strong>
-                Use range from my laboratory report
-              </strong>
-
-              <span>
-                Enter the reference range shown
-                on your laboratory report.
-              </span>
-            </div>
-
-          </label>
-
-        </div>
+        
 
         {/* GLUCOSE RESULT */}
 
@@ -588,60 +527,7 @@ Requirements:
 
         {/* LABORATORY RANGE */}
 
-        {rangeType === 'laboratory' && (
-
-          <div className="lab-range-section">
-
-            <h2>
-              Laboratory reference range
-            </h2>
-
-            <p>
-              Enter the range shown on your
-              laboratory report.
-            </p>
-
-            <div className="range-inputs">
-
-              <input
-                type="number"
-                step="any"
-                placeholder="Low"
-                value={labRange.low}
-                onChange={(e) =>
-                  setLabRange({
-                    ...labRange,
-                    low: e.target.value,
-                  })
-                }
-              />
-
-              <span>
-                to
-              </span>
-
-              <input
-                type="number"
-                step="any"
-                placeholder="High"
-                value={labRange.high}
-                onChange={(e) =>
-                  setLabRange({
-                    ...labRange,
-                    high: e.target.value,
-                  })
-                }
-              />
-
-              <span>
-                mg/dL
-              </span>
-
-            </div>
-
-          </div>
-
-        )}
+        
 
         {/* ERROR */}
 
