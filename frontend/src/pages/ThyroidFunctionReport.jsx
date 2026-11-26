@@ -36,9 +36,40 @@ function ThyroidFunctionReport() {
   const [aiLoading, setAiLoading] = useState(false)
   const [aiError, setAiError] = useState('')
 
-  const handlePdfResults = (items) => {
-    const fieldMap = { tsh: 'tsh', 'free-t4': 'freeT4', 'free-t3': 'freeT3', 'total-t4': 'totalT4', 'total-t3': 'totalT3' }
-    setResults((current) => ({ ...current, ...Object.fromEntries(items.filter((item) => fieldMap[item.id]).map((item) => [fieldMap[item.id], item.value])) }))
+  const fieldMap = {
+    tsh: 'tsh',
+    'free-t4': 'freeT4',
+    'free-t3': 'freeT3',
+    'total-t4': 'totalT4',
+    'total-t3': 'totalT3',
+  }
+
+  const handlePdfResults = (items, numericRanges = {}) => {
+    if (!items.length) {
+      setLabRanges({})
+      setRangeType('standard')
+      setAnalysis(null)
+      setAiExplanation('')
+      setError('')
+      return
+    }
+
+    const extractedValues = Object.fromEntries(
+      items
+        .filter((item) => fieldMap[item.id] && item.value !== null && item.value !== undefined && item.value !== '')
+        .map((item) => [fieldMap[item.id], String(item.value)])
+    )
+    const extractedRanges = Object.fromEntries(
+      Object.entries(numericRanges)
+        .filter(([id]) => fieldMap[id])
+        .map(([id, range]) => [fieldMap[id], range])
+    )
+
+    setResults((current) => ({ ...current, ...extractedValues }))
+    setLabRanges(extractedRanges)
+    setRangeType(Object.keys(extractedRanges).length ? 'laboratory' : 'standard')
+    setAnalysis(null)
+    setAiExplanation('')
     setError('')
   }
 
@@ -100,15 +131,6 @@ function ThyroidFunctionReport() {
   // LAB RANGE CHANGE
   // ==============================
 
-  const handleRangeChange = (id, type, value) => {
-    setLabRanges((previous) => ({
-      ...previous,
-      [id]: {
-        ...previous[id],
-        [type]: value,
-      },
-    }))
-  }
 
   // ==============================
   // THYROID ANALYSIS
@@ -520,7 +542,12 @@ Requirements:
 
       {/* ================= FORM ================= */}
 
-      <LabPdfReview expectedCategory="tft" onResults={handlePdfResults} />
+      <LabPdfReview
+        expectedCategory="tft"
+        parameters={parameters}
+        fieldMap={fieldMap}
+        onResults={handlePdfResults}
+      />
       <form onSubmit={handleSubmit}>
 
         {/* PERSONAL INFORMATION */}
