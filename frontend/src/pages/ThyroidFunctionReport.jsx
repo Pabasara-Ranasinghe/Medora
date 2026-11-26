@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './ThyroidFunctionReport.css'
+import LabPdfReview from '../components/LabPdfReview'
 
 function ThyroidFunctionReport() {
   const navigate = useNavigate()
@@ -34,6 +35,12 @@ function ThyroidFunctionReport() {
   const [aiExplanation, setAiExplanation] = useState('')
   const [aiLoading, setAiLoading] = useState(false)
   const [aiError, setAiError] = useState('')
+
+  const handlePdfResults = (items) => {
+    const fieldMap = { tsh: 'tsh', 'free-t4': 'freeT4', 'free-t3': 'freeT3', 'total-t4': 'totalT4', 'total-t3': 'totalT3' }
+    setResults((current) => ({ ...current, ...Object.fromEntries(items.filter((item) => fieldMap[item.id]).map((item) => [fieldMap[item.id], item.value])) }))
+    setError('')
+  }
 
   const parameters = [
     {
@@ -513,6 +520,7 @@ Requirements:
 
       {/* ================= FORM ================= */}
 
+      <LabPdfReview expectedCategory="tft" onResults={handlePdfResults} />
       <form onSubmit={handleSubmit}>
 
         {/* PERSONAL INFORMATION */}
@@ -594,79 +602,7 @@ Requirements:
 
         </div>
 
-        {/* REFERENCE RANGES */}
-
-        <div className="range-section">
-
-          <h2>
-            Reference ranges
-          </h2>
-
-          <p>
-            Choose how Medora should interpret
-            your thyroid function results.
-          </p>
-
-          <label className="range-option">
-
-            <input
-              type="radio"
-              name="rangeType"
-              value="standard"
-              checked={
-                rangeType === 'standard'
-              }
-              onChange={() => {
-                setRangeType('standard')
-                setLabRanges({})
-              }}
-            />
-
-            <div>
-
-              <strong>
-                Use Medora's standard ranges
-              </strong>
-
-              <span>
-                Medora will use its predefined
-                thyroid function reference ranges.
-              </span>
-
-            </div>
-
-          </label>
-
-          <label className="range-option">
-
-            <input
-              type="radio"
-              name="rangeType"
-              value="laboratory"
-              checked={
-                rangeType === 'laboratory'
-              }
-              onChange={() =>
-                setRangeType('laboratory')
-              }
-            />
-
-            <div>
-
-              <strong>
-                Use ranges from my laboratory report
-              </strong>
-
-              <span>
-                Enter the reference ranges shown
-                on your laboratory report.
-              </span>
-
-            </div>
-
-          </label>
-
-        </div>
+        
 
         {/* THYROID RESULTS */}
 
@@ -735,63 +671,7 @@ Requirements:
 
               </div>
 
-              {rangeType === 'laboratory' && (
-
-                <div className="lab-range">
-
-                  <label>
-                    My laboratory reference range
-                  </label>
-
-                  <div className="range-inputs">
-
-                    <input
-                      type="number"
-                      step="any"
-                      placeholder="Low"
-                      value={
-                        labRanges[
-                          parameter.id
-                        ]?.low || ''
-                      }
-                      onChange={(e) =>
-                        handleRangeChange(
-                          parameter.id,
-                          'low',
-                          e.target.value
-                        )
-                      }
-                      required
-                    />
-
-                    <span>
-                      to
-                    </span>
-
-                    <input
-                      type="number"
-                      step="any"
-                      placeholder="High"
-                      value={
-                        labRanges[
-                          parameter.id
-                        ]?.high || ''
-                      }
-                      onChange={(e) =>
-                        handleRangeChange(
-                          parameter.id,
-                          'high',
-                          e.target.value
-                        )
-                      }
-                      required
-                    />
-
-                  </div>
-
-                </div>
-
-              )}
+              
 
             </div>
 
