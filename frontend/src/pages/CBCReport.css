@@ -562,3 +562,89 @@
   line-height: 1.7;
   white-space: pre-line;
 }
+
+
+
+
+.pdf-report-selector {
+  margin: 12px 0 20px 32px;
+}
+
+.pdf-report-selector select {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 14px;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.pdf-report-hint {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #777;
+}
+
+.lab-range {
+  margin-top: 12px;
+}
+
+.lab-range label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.lab-range .range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+/* PDF extraction summary */
+.pdf-extraction-summary {
+  background: #f5f9fc;
+  border: 1px solid #dce7ed;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 18px 0;
+}
+
+.pdf-extraction-summary p {
+  color: #647773;
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+
+/* Extracted result status labels */
+.extracted-status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.extracted-status-within {
+  background: #eef7fc;
+  color: #39759f;
+  border: 1px solid #4f8fbf;
+}
+
+.extracted-status-above {
+  background: #fff2f2;
+  color: #b63b38;
+  border: 1px solid #d9534f;
+}
+
+.extracted-status-below {
+  background: #fff9e6;
+  color: #967400;
+  border: 1px solid #d6a600;
+}
