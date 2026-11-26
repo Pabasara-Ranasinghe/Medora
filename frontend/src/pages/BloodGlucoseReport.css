@@ -74,8 +74,7 @@
 
 .test-type-section,
 .range-section,
-.glucose-result-section,
-.lab-range-section {
+.glucose-result-section {
   background: white;
   border: 1px solid #e0ebf3;
   border-radius: 18px;
@@ -86,67 +85,26 @@
 .test-type-section h2,
 .range-section h2,
 .glucose-result-section h2,
-.lab-range-section h2 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
 
 .test-type-section > p,
 .range-section > p,
 .glucose-result-section > p,
-.lab-range-section > p {
-  color: #627d98;
-  line-height: 1.6;
-  margin-bottom: 25px;
-}
 
 /* =========================
    OPTIONS
 ========================= */
 
 .test-type-option,
-.range-option {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 18px;
-  border: 1px solid #e0ebf3;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  transition: 0.2s;
-}
 
 .test-type-option:hover,
-.range-option:hover {
-  border-color: #1479ff;
-  background: #f7fbff;
-}
 
 .test-type-option input,
-.range-option input {
-  margin-top: 4px;
-  accent-color: #1479ff;
-}
 
 .test-type-option div,
-.range-option div {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
 
 .test-type-option strong,
-.range-option strong {
-  font-size: 15px;
-}
 
 .test-type-option span,
-.range-option span {
-  color: #627d98;
-  font-size: 14px;
-  line-height: 1.5;
-}
 
 /* =========================
    GLUCOSE INPUT
@@ -526,8 +484,7 @@
 
   .test-type-section,
   .range-section,
-  .glucose-result-section,
-  .lab-range-section {
+  .glucose-result-section {
     padding: 22px;
   }
 
