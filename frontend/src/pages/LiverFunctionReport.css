@@ -95,42 +95,11 @@
   line-height: 1.5;
 }
 
-.range-option {
-  display: flex;
-  gap: 15px;
-  padding: 18px;
-  border: 1px solid #dfe8ee;
-  border-radius: 12px;
-  margin-top: 12px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
 
-.range-option:hover {
-  border-color: #8fb8d2;
-  background: #f7fbfe;
-}
 
-.range-option input {
-  margin-top: 4px;
-  accent-color: #4f8fbf;
-}
 
-.range-option div {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
 
-.range-option strong {
-  font-size: 15px;
-}
 
-.range-option span {
-  font-size: 14px;
-  color: #71837e;
-  line-height: 1.5;
-}
 
 /* =========================
    RESULTS
@@ -184,8 +153,7 @@
    RESULT INPUT
 ========================= */
 
-.result-input label,
-.lab-range label {
+.result-input label {
   display: block;
   font-size: 13px;
   font-weight: 600;
@@ -227,11 +195,6 @@
    LAB RANGE
 ========================= */
 
-.lab-range {
-  grid-column: 1 / -1;
-  padding-top: 18px;
-  border-top: 1px solid #edf1ef;
-}
 
 .range-inputs {
   display: flex;
@@ -541,9 +504,6 @@
     gap: 18px;
   }
 
-  .lab-range {
-    grid-column: auto;
-  }
 
   .analysis-section {
     padding: 25px 18px;
