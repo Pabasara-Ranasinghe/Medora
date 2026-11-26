@@ -45,9 +45,42 @@ function KidneyFunctionReport() {
 
   const [aiError, setAiError] = useState('')
 
-  const handlePdfResults = (items) => {
-    const fieldMap = { bun: 'bun', creatinine: 'creatinine', egfr: 'egfr', 'uric-acid': 'uricAcid', sodium: 'sodium', potassium: 'potassium', chloride: 'chloride' }
-    setResults((current) => ({ ...current, ...Object.fromEntries(items.filter((item) => fieldMap[item.id]).map((item) => [fieldMap[item.id], item.value])) }))
+  const fieldMap = {
+    bun: 'bun',
+    creatinine: 'creatinine',
+    egfr: 'egfr',
+    'uric-acid': 'uricAcid',
+    sodium: 'sodium',
+    potassium: 'potassium',
+    chloride: 'chloride',
+  }
+
+  const handlePdfResults = (items, numericRanges = {}) => {
+    if (!items.length) {
+      setLabRanges({})
+      setRangeType('standard')
+      setAnalysis(null)
+      setAiExplanation('')
+      setError('')
+      return
+    }
+
+    const extractedValues = Object.fromEntries(
+      items
+        .filter((item) => fieldMap[item.id] && item.value !== null && item.value !== undefined && item.value !== '')
+        .map((item) => [fieldMap[item.id], String(item.value)])
+    )
+    const extractedRanges = Object.fromEntries(
+      Object.entries(numericRanges)
+        .filter(([id]) => fieldMap[id])
+        .map(([id, range]) => [fieldMap[id], range])
+    )
+
+    setResults((current) => ({ ...current, ...extractedValues }))
+    setLabRanges(extractedRanges)
+    setRangeType(Object.keys(extractedRanges).length ? 'laboratory' : 'standard')
+    setAnalysis(null)
+    setAiExplanation('')
     setError('')
   }
 
@@ -130,22 +163,6 @@ function KidneyFunctionReport() {
   // LAB RANGE CHANGE
   // ========================================
 
-  const handleRangeChange = (
-    id,
-    type,
-    value
-  ) => {
-
-    setLabRanges((previous) => ({
-      ...previous,
-
-      [id]: {
-        ...previous[id],
-        [type]: value,
-      },
-    }))
-
-  }
 
   // ========================================
   // NORMAL KIDNEY ANALYSIS
@@ -198,18 +215,13 @@ function KidneyFunctionReport() {
         Object.entries(labRanges).forEach(
           ([key, range]) => {
 
-            if (
-              range?.low !== '' &&
-              range?.high !== '' &&
-              range?.low !== undefined &&
-              range?.high !== undefined
-            ) {
-
+            if (range?.low !== '' && range?.low !== undefined && range?.low !== null) {
               convertedLabRanges[key] = {
                 low: Number(range.low),
-                high: Number(range.high),
+                high: range.high === '' || range.high === undefined || range.high === null
+                  ? null
+                  : Number(range.high),
               }
-
             }
 
           }
@@ -671,7 +683,12 @@ Requirements:
           FORM
       ======================================== */}
 
-      <LabPdfReview expectedCategory="rft" onResults={handlePdfResults} />
+      <LabPdfReview
+        expectedCategory="rft"
+        parameters={parameters}
+        fieldMap={fieldMap}
+        onResults={handlePdfResults}
+      />
       <form onSubmit={handleSubmit}>
 
         {/* ========================================
@@ -827,13 +844,7 @@ Requirements:
 
                   </div>
 
-                </div>
-
-                {/* LABORATORY RANGE */}
-
-                
-
-              </div>
+                </div></div>
 
             )
           )}
