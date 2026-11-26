@@ -22,6 +22,17 @@ public class KidneyFunctionService {
                         request.getGender()
                 );
 
+        if ("laboratory".equalsIgnoreCase(request.getRangeType())
+                && request.getLabRanges() != null) {
+            request.getLabRanges().forEach((parameter, labRange) -> {
+                if (ranges.containsKey(parameter)
+                        && labRange != null
+                        && labRange.getLow() != null) {
+                    ranges.put(parameter, new Range(labRange.getLow(), labRange.getHigh()));
+                }
+            });
+        }
+
         System.out.println("AGE: " + request.getAge());
         System.out.println("GENDER: " + request.getGender());
         System.out.println("REFERENCE RANGES: " + ranges.keySet());
